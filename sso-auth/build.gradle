@@ -1,0 +1,16 @@
+dependencies {
+    compile('org.springframework.boot:spring-boot-starter-web')
+    compile project(':sso-model')
+    runtime('mysql:mysql-connector-java')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+
+task authServer doLast {
+    bootRun
+}
+
+configure(authServer) {
+    group "application"
+}
+
+authServer.finalizedBy bootRun

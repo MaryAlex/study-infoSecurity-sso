@@ -1,0 +1,30 @@
+dependencies {
+    compile project(':sso-model')
+    compile('org.springframework.boot:spring-boot-starter-web')
+    runtime('mysql:mysql-connector-java')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+
+task computer doLast {
+    bootRun { args = ["--spring.profiles.active=computer"] }
+}
+task flat doLast {
+    bootRun { args = ["--spring.profiles.active=flat"] }
+}
+task motorcycle doLast {
+    bootRun { args = ["--spring.profiles.active=motorcycle"] }
+}
+
+configure(computer) {
+    group "application"
+}
+configure(flat) {
+    group "application"
+}
+configure(motorcycle) {
+    group "application"
+}
+
+computer.finalizedBy bootRun
+flat.finalizedBy bootRun
+motorcycle.finalizedBy bootRun

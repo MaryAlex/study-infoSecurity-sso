@@ -1,0 +1,11 @@
+jar {
+    enabled = true
+}
+
+dependencies {
+    compile('org.springframework.boot:spring-boot-starter-web')
+    compile('org.springframework.boot:spring-boot-starter-data-jpa')
+    compile("org.springframework:spring-context:${spring}")
+    compile("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonKoltin")
+    compile("org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion")
+}
