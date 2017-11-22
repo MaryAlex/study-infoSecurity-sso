@@ -6,7 +6,7 @@
   "scripts": {
     "firstStart": "npm i && webpack-dev-server",
     "start": "webpack-dashboard -- webpack-dev-server --port=3000",
-    "precommit": "../.precommit.sh",
+    "prepush": "../.prepush.sh",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
