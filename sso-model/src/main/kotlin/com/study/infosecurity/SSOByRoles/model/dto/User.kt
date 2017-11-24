@@ -14,14 +14,12 @@ data class User(
         @GeneratedValue(strategy = GenerationType.AUTO)
         var id: Long,
 
-        @Column(name = "nickname", unique = false, length = 255)
-        @NotEmpty(message = "Please inter your nickname")
-        var nickname: String,
+        @Column(name = "username", unique = false, length = 255)
+        @NotEmpty(message = "Please inter your username")
+        var username: String,
 
         @Column(name = "password", unique = false)
         @Length(min = 5, message = "Your password must have at least 5 characters")
         @NotEmpty(message = "Please inter your password")
-        // To not serialize this field
-        @Transient
         var password: String
 )
