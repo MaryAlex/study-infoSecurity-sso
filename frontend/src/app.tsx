@@ -1,14 +1,15 @@
 import * as React from 'react';
-import SimpleComponent from '@src/components/simplecomponent/simpleComponent';
+import Login from '@src/pages/login/login';
+import { Route, Switch } from 'react-router';
+import Registration from '@src/pages/registration/registration';
 
 export class App extends React.Component {
     render() {
         return (
-            <div>
-                <h1>Hey you!</h1>
-                <p>Simple component</p>
-                <SimpleComponent/>
-            </div>
+            <Switch>
+                <Route exact path="/" component={Login}/>
+                <Route exact path="/registration" component={Registration}/>
+            </Switch>
         );
     }
 }

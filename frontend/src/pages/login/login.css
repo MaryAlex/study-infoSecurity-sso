@@ -1,0 +1,11 @@
+.login {
+    text-align: center;
+    padding-left: 40%;
+    padding-right: 40%;
+    padding-top: 20%;
+}
+
+.login_buttons {
+    justify-content: center;
+    display: flex;
+}

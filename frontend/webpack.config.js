@@ -5,7 +5,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const PATHS = {
-    src:  path.resolve(__dirname, './src')
+    src: path.resolve(__dirname, './src')
 };
 
 const DEV_SERVER = {
@@ -27,7 +27,7 @@ module.exports = function (env) {
         devServer: DEV_SERVER,
 
         resolve: {
-            alias: { '@src': PATHS.src },
+            alias: {'@src': PATHS.src},
             extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
             modules: ['node_modules', 'src']
         },
@@ -55,6 +55,12 @@ module.exports = function (env) {
                         {loader: 'ts-loader'}
                     ]
                 },
+                {
+                    test: /\.(ts|tsx)$/,
+                    enforce: 'pre',
+                    loader: 'tslint-loader'
+                },
+
                 // json
                 {
                     test: /\.json$/,
@@ -64,16 +70,20 @@ module.exports = function (env) {
                 // css
                 {
                     test: /\.css$/,
-                    loader: ExtractTextPlugin.extract([
-                        'css-loader?{modules: false}',
-                        'postcss-loader'
-                    ])
+                    loader: ExtractTextPlugin.extract({
+                        fallback: 'style-loader',
+                        use: 'css-loader'
+                    })
                 }
             ]
         },
 
         plugins: [
             new DashboardPlugin(),
+            new ExtractTextPlugin({
+                filename: 'style.css?[contenthash]',
+                allChunks: true
+            }),
             new webpack.DefinePlugin({
                 'process.env': {
                     NODE_ENV: JSON.stringify(isDev ? 'development' : 'production')
@@ -83,9 +93,7 @@ module.exports = function (env) {
                 name: 'vendor',
                 filename: 'vendor.bundle.js?[hash]'
             }),
-            new webpack.HotModuleReplacementPlugin({
-                multiStep: true
-            }),
+            new webpack.HotModuleReplacementPlugin(),
             new webpack.NamedModulesPlugin(),
             new HtmlWebpackPlugin({
                 template: './index.html'

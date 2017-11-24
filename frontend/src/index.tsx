@@ -1,8 +1,11 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { App } from '@src/app';
+import { BrowserRouter } from 'react-router-dom';
+import './app.css';
 
 const renderRoot = (app: JSX.Element): void => {
+    document.getElementById('body').className = 'app';
     ReactDOM.render(app, document.getElementById('root'));
 };
 
@@ -14,7 +17,9 @@ if (process.env.NODE_ENV === 'production') {
     const HotContainer = require('react-hot-loader').AppContainer;
     renderRoot((
         <HotContainer>
-            <App/>
+            <BrowserRouter>
+                <App/>
+            </BrowserRouter>
         </HotContainer>
     ));
 
@@ -24,7 +29,9 @@ if (process.env.NODE_ENV === 'production') {
             const NextApp = (await System.import('./app')).App;
             renderRoot((
                 <HotContainer>
-                    <NextApp/>
+                    <BrowserRouter>
+                        <NextApp/>
+                    </BrowserRouter>
                 </HotContainer>
             ));
         });

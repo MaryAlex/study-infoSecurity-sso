@@ -17,6 +17,8 @@
       "rxjs"
     ],
     "interface-over-type-literal": false,
+    "jsx-alignment": false,
+    "jsx-boolean-value": false,
     "jsx-no-lambda": false,
     "jsx-no-multiline-js": false,
     "max-classes-per-file": [
@@ -35,13 +37,15 @@
     ],
     "newline-before-return": false,
     "no-any": false,
+    "no-empty-interface": false,
     "no-inferrable-types": [
       true,
       "ignore-params",
       "ignore-properties"
     ],
+    "no-implicit-dependencies": false,
     "no-import-side-effect": [
-      true
+      false
     ],
     "no-invalid-this": [
       true,
@@ -56,6 +60,7 @@
       "react"
     ],
     "no-var-requires": false,
+    "no-submodule-imports": [true, "@src"],
     "object-literal-sort-keys": false,
     "object-literal-shorthand": false,
     "one-variable-per-declaration": [
