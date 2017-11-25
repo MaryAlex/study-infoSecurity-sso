@@ -1,7 +1,7 @@
 // TODO: add doc comments
 declare module 'react-cookie' {
     import { Component } from 'react';
-    type CookieObject = string | object;
+    export type CookieObject = string | object;
 
     export interface IGetOptions {
         doNotParse: boolean;

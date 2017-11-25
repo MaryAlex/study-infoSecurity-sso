@@ -1,14 +1,8 @@
-import Axios from 'axios';
-import { Cookies } from 'react-cookie';
+import Axios, { AxiosPromise } from 'axios';
+import AuthenticationResponse = SSOByRolesDefinitions.AuthenticationResponse;
 
+// TODO: Class to paths
 export class LoginService {
-    static cookie = new Cookies();
-    // TODO: Change when server will be ready
-    static authentication = (username: string, password: string): void => {
-        LoginService.cookie.set('token', 'some_token');
-    }
-
-    static isTokenValide = (): boolean => {
-        return true;
-    }
+    static authentication = (username: string, password: string): AxiosPromise<AuthenticationResponse> =>
+        Axios('/authApi/authentication', { method: 'get', params: { username, password } })
 }

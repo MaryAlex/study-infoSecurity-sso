@@ -3,8 +3,14 @@ import './login.css';
 import { Button, ButtonToolbar, ControlLabel, FormControl, FormGroup } from 'react-bootstrap';
 import { LoginService } from './LoginService';
 import { LoginState } from '@src/pages/login/LoginState';
+import { IArgs } from '@src/services/HttpRequestService';
+import AuthenticationResponse = SSOByRolesDefinitions.AuthenticationResponse;
+import { CookiesService } from '@src/services/CookiesService';
+import ResponseCode = SSOByRolesDefinitions.ResponseCode;
+import { withRouter } from 'react-router';
 
 interface ILoginProperties {
+    history: string[];
 }
 
 export class Login extends React.Component<ILoginProperties, LoginState> {
@@ -47,8 +53,14 @@ export class Login extends React.Component<ILoginProperties, LoginState> {
 
     private submit = (event: React.FormEvent<HTMLFormElement>): void => {
         event.preventDefault();
-        LoginService.authentication(this.state.username, this.state.password);
+        LoginService.authentication(this.state.username, this.state.password)
+            .then((response: IArgs<AuthenticationResponse>) => {
+                if (response.data.responseCode === ResponseCode.SUCCESS) {
+                    CookiesService.set(CookiesService.TOKEN_KEY, response.data.token);
+                    this.props.history.push('/');
+                }
+            });
     }
 }
 
-export default Login;
+export default withRouter(Login);

@@ -13,7 +13,25 @@ const DEV_SERVER = {
     hotOnly: true,
     historyApiFallback: true,
     overlay: true,
-    contentBase: './src'
+    contentBase: './src',
+    proxy: {
+        '/authApi': {
+            target: 'http://localhost:9000',
+            pathRewrite: {'^/authApi': ''}
+        },
+        '/computerApi': {
+            target: 'http://localhost:8090',
+            pathRewrite: {'^/computerApi': ''}
+        },
+        '/flatApi': {
+            target: 'http://localhost:8091',
+            pathRewrite: {'^/flatApi': ''}
+        },
+        '/motorcycleApi': {
+            target: 'http://localhost:8092',
+            pathRewrite: {'^/motorcycleApi': ''}
+        }
+    }
 };
 
 module.exports = function (env) {

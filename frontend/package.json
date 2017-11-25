@@ -1,5 +1,5 @@
 {
-  "name": "ssobyroles",
+  "name": "ssoByRoles",
   "version": "1.0.0",
   "description": "Client for 3 servers to test realization of sso by roles",
   "main": "index.js",

@@ -4,6 +4,18 @@ dependencies {
     runtime('mysql:mysql-connector-java')
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
+apply plugin: 'cz.habarta.typescript-generator'
+
+generateTypeScript {
+    jsonLibrary = 'jackson2'
+    classPatterns = [
+            'com.study.infosecurity.ssoByRoles.model.dto.**',
+            'com.study.infosecurity.ssoByRoles.model.poko.**'
+    ]
+    outputFile = '../frontend/src/types/ssoByRoles.d.ts'
+    outputKind = 'global'
+    namespace = 'SSOByRolesDefinitions'
+}
 
 task computer doLast {
     bootRun { args = ["--spring.profiles.active=computer"] }
