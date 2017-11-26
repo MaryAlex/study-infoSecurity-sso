@@ -8,9 +8,11 @@ import com.study.infosecurity.ssoByRoles.service.JwtService;
 import com.study.infosecurity.ssoByRoles.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 
 @RestController
 public class MainAuthController {
@@ -41,5 +43,16 @@ public class MainAuthController {
     @RequestMapping(value = "/validation", method = RequestMethod.GET)
     public CommonResponse validation(@RequestParam String token) {
         return new CommonResponse();
+    }
+
+    @RequestMapping(value = "/addUser", method = RequestMethod.POST)
+    public CommonResponse addUser(@RequestBody User user) {
+        try{
+            userService.save(user);
+            return new CommonResponse(ResponseCode.SUCCESS, "User succesfully added");
+        }
+        catch (Exception ex){
+            return new CommonResponse(ResponseCode.ERROR, "Some Error =(");
+        }
     }
 }
