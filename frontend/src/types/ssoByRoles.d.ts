@@ -1,5 +1,3 @@
-// Generated using typescript-generator version 1.28.343 on 2017-11-26 00:01:13.
-
 declare namespace SSOByRolesDefinitions {
 
     interface Computer {
@@ -30,6 +28,14 @@ declare namespace SSOByRolesDefinitions {
         id: number;
         username: string;
         password: string;
+        roles: Roles[];
+    }
+
+    interface UserForDB {
+        id: number;
+        username: string;
+        password: string;
+        roles: string;
     }
 
     interface AuthenticationResponse extends CommonResponse {
@@ -52,6 +58,10 @@ declare namespace SSOByRolesDefinitions {
 
     interface MotorcycleResponse extends CommonResponse {
         motorcycles: Motorcycle[];
+    }
+
+    interface UserResponse extends CommonResponse {
+        user: User;
     }
 
     const enum ResponseCode {

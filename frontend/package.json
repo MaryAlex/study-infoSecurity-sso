@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --port=3000",
-    "firstStart": "npm i && webpack-dev-server",
-    "prepush": "sh ./.prepush.sh",
+    "firstStart": "npm i && webpack-dev-server --port=3000",
+    "prepush": "sh ../.prepush.sh",
     "test": "echo \"Error: no test specified\" && exit 1",
     "runWIthDashboard": "webpack-dashboard -- webpack-dev-server --port=3000"
   },
