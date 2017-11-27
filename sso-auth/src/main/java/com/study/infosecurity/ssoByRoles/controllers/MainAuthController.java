@@ -4,6 +4,7 @@ import com.study.infosecurity.ssoByRoles.model.dto.User;
 import com.study.infosecurity.ssoByRoles.model.poko.constant.ResponseCode;
 import com.study.infosecurity.ssoByRoles.model.poko.response.AuthenticationResponse;
 import com.study.infosecurity.ssoByRoles.model.poko.response.CommonResponse;
+import com.study.infosecurity.ssoByRoles.model.poko.response.ValidationResponse;
 import com.study.infosecurity.ssoByRoles.service.JwtService;
 import com.study.infosecurity.ssoByRoles.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,13 +43,15 @@ public class MainAuthController {
 
     @RequestMapping(value = "/validation", method = RequestMethod.GET)
     public CommonResponse validation(@RequestParam String token) {
-        return new CommonResponse();
+        User user = this.userService.getByUsername(this.jwtService.getUsernameFromToken(token));
+        return user == null ? new CommonResponse(ResponseCode.ERROR, "Some Error =(") :  new ValidationResponse(user);
+
     }
 
     @RequestMapping(value = "/addUser", method = RequestMethod.POST)
     public CommonResponse addUser(@RequestBody User user) {
         try{
-            userService.save(user);
+            this.userService.save(user);
             return new CommonResponse(ResponseCode.SUCCESS, "User succesfully added");
         }
         catch (Exception ex){

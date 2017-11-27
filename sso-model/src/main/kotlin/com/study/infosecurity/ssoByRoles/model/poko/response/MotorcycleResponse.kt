@@ -5,5 +5,5 @@ import com.study.infosecurity.ssoByRoles.model.poko.constant.ResponseCode
 
 
 class MotorcycleResponse @JvmOverloads constructor(val motorcycles: List<Motorcycle>,
-                                                  responseCode: ResponseCode = ResponseCode.SUCCESS,
-                                                  errorMessage: String = "") : CommonResponse(responseCode, errorMessage)
+                                                   responseCode: ResponseCode = ResponseCode.SUCCESS,
+                                                   errorMessage: String = "") : CommonResponse(responseCode, errorMessage)

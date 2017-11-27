@@ -10,17 +10,17 @@ import javax.validation.constraints.NotEmpty
 
 @Entity
 class Flat (
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    var id: Long,
+        @Id
+        @GeneratedValue(strategy = GenerationType.AUTO)
+        var id: Long,
 
-    @Column(name = "numberOfRooms", unique = false)
-    @NotEmpty(message = "Please enter number Of Rooms")
-    var numbersOfRoom: String,
+        @Column(name = "numberOfRooms", unique = false)
+        @NotEmpty(message = "Please enter number Of Rooms")
+        var numbersOfRoom: String,
 
-    @Column(name = "square", unique = false)
-    var square: String,
+        @Column(name = "square", unique = false)
+        var square: String,
 
-    @Column(name = "descriptioin", unique = false)
-    var descriptioin: String
+        @Column(name = "descriptioin", unique = false)
+        var descriptioin: String
 )

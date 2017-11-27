@@ -1,3 +1,4 @@
+// Generated using typescript-generator version 1.28.343 on 2017-11-27 01:13:33.
 declare namespace SSOByRolesDefinitions {
 
     interface Computer {
@@ -60,7 +61,7 @@ declare namespace SSOByRolesDefinitions {
         motorcycles: Motorcycle[];
     }
 
-    interface UserResponse extends CommonResponse {
+    interface ValidationResponse extends CommonResponse {
         user: User;
     }
 
