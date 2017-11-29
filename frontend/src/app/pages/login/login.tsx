@@ -3,7 +3,7 @@ import './login.css';
 import { Button, ButtonToolbar, ControlLabel, FormControl, FormGroup } from 'react-bootstrap';
 import { LoginService } from './LoginService';
 import { LoginState } from '@src/app/pages/login/LoginState';
-import { HttpRequestService, IArgs } from '@src/app/services/HttpRequestService';
+import { IArgs } from '@src/app/services/HttpRequestService';
 import AuthenticationResponse = SSOByRolesDefinitions.AuthenticationResponse;
 import { CookiesService } from '@src/app/services/CookiesService';
 import ResponseCode = SSOByRolesDefinitions.ResponseCode;
@@ -54,7 +54,7 @@ export class Login extends React.Component<ILoginProperties, LoginState> {
     private submit = (event: React.FormEvent<HTMLFormElement>): void => {
         event.preventDefault();
         LoginService.authentication(this.state.username, this.state.password)
-            .then((response: IArgs<AuthenticationResponse>) => {
+            .subscribe((response: IArgs<AuthenticationResponse>) => {
                 if (response.data.responseCode === ResponseCode.SUCCESS) {
                     CookiesService.set(CookiesService.TOKEN_KEY, response.data.token);
                     this.props.history.push('/');

@@ -75,7 +75,7 @@ export class Registration extends React.Component<IRegistrationProperties, Regis
     private submit = (event: React.FormEvent<HTMLFormElement>): void => {
         event.preventDefault();
         RegistrationService.registration(this.state.username, this.state.password, this.state.roles)
-            .then((response: IArgs<CommonResponse>) => {
+            .subscribe((response: IArgs<CommonResponse>) => {
             if (response.data.responseCode === ResponseCode.ERROR) {
                 alert('Could not add new user');
             } else {
