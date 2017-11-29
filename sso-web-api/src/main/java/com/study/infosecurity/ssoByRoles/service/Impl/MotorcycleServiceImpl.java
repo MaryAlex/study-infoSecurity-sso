@@ -9,8 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-
-@Service(" motorcycleService")
+@Service("motorcycleService")
 public class MotorcycleServiceImpl implements MotorcycleService {
     private final MotorcycleRepository motorcycleRepository;
 
@@ -35,7 +34,12 @@ public class MotorcycleServiceImpl implements MotorcycleService {
     }
 
     @Override
-    public boolean exists(Long id) {
+    public boolean isExists(Long id) {
         return this.motorcycleRepository.existsById(id);
+    }
+
+    @Override
+    public boolean isExists(Motorcycle motorcycle) {
+        return this.isExists(motorcycle.getId());
     }
 }

@@ -16,11 +16,11 @@ class Flat (
 
         @Column(name = "numberOfRooms", unique = false)
         @NotEmpty(message = "Please enter number Of Rooms")
-        var numbersOfRoom: String,
+        var numbersOfRoom: Number,
 
         @Column(name = "square", unique = false)
-        var square: String,
+        var square: Number,
 
-        @Column(name = "descriptioin", unique = false)
-        var descriptioin: String
+        @Column(name = "description", unique = false)
+        var description: String
 )

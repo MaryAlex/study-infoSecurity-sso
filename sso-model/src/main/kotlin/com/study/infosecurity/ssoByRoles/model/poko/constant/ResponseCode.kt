@@ -5,5 +5,6 @@ import com.fasterxml.jackson.annotation.JsonFormat
 @JsonFormat(shape = JsonFormat.Shape.NUMBER_INT)
 enum class ResponseCode {
     SUCCESS,
-    ERROR
+    ERROR,
+    AUTHENTICATION_FAIL_ERROR
 }

@@ -2,10 +2,10 @@ import * as React from 'react';
 import './login.css';
 import { Button, ButtonToolbar, ControlLabel, FormControl, FormGroup } from 'react-bootstrap';
 import { LoginService } from './LoginService';
-import { LoginState } from '@src/pages/login/LoginState';
-import { IArgs } from '@src/services/HttpRequestService';
+import { LoginState } from '@src/app/pages/login/LoginState';
+import { HttpRequestService, IArgs } from '@src/app/services/HttpRequestService';
 import AuthenticationResponse = SSOByRolesDefinitions.AuthenticationResponse;
-import { CookiesService } from '@src/services/CookiesService';
+import { CookiesService } from '@src/app/services/CookiesService';
 import ResponseCode = SSOByRolesDefinitions.ResponseCode;
 import { withRouter } from 'react-router';
 

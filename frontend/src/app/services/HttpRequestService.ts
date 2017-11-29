@@ -1,7 +1,7 @@
 import Axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
-import { CookiesService } from '@src/services/CookiesService';
-import ResponseCode = SSOByRolesDefinitions.ResponseCode;
+import { CookiesService } from '@src/app/services/CookiesService';
 import CommonResponse = SSOByRolesDefinitions.CommonResponse;
+import ResponseCode = SSOByRolesDefinitions.ResponseCode;
 
 export interface IArgs<T> extends AxiosResponse<T> {
     data: T;

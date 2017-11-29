@@ -1,4 +1,5 @@
-// Generated using typescript-generator version 1.28.343 on 2017-11-27 01:13:33.
+// Generated using typescript-generator version 1.28.343 on 2017-11-28 23:54:06.
+
 declare namespace SSOByRolesDefinitions {
 
     interface Computer {
@@ -11,17 +12,17 @@ declare namespace SSOByRolesDefinitions {
 
     interface Flat {
         id: number;
-        numbersOfRoom: string;
-        square: string;
-        descriptioin: string;
+        numbersOfRoom: any;
+        square: any;
+        description: string;
     }
 
     interface Motorcycle {
         id: number;
         firm: string;
         model: string;
-        width: string;
-        height: string;
+        width: any;
+        height: any;
         displacement: string;
     }
 
@@ -49,16 +50,8 @@ declare namespace SSOByRolesDefinitions {
         errorMessage: string;
     }
 
-    interface ComputerResponse extends CommonResponse {
-        computers: Computer[];
-    }
-
-    interface FlatResponse extends CommonResponse {
-        flats: Flat[];
-    }
-
-    interface MotorcycleResponse extends CommonResponse {
-        motorcycles: Motorcycle[];
+    interface GetAllResponse<T> extends CommonResponse {
+        objects: T[];
     }
 
     interface ValidationResponse extends CommonResponse {
@@ -68,6 +61,7 @@ declare namespace SSOByRolesDefinitions {
     const enum ResponseCode {
         SUCCESS = 0,
         ERROR = 1,
+        AUTHENTICATION_FAIL_ERROR = 2,
     }
 
     const enum Roles {

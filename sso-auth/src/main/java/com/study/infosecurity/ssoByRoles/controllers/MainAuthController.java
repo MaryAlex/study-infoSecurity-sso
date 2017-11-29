@@ -9,11 +9,9 @@ import com.study.infosecurity.ssoByRoles.service.JwtService;
 import com.study.infosecurity.ssoByRoles.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 
 @RestController
 public class MainAuthController {
@@ -35,27 +33,21 @@ public class MainAuthController {
     public CommonResponse authentication(@RequestParam String username,
                                          @RequestParam String password) {
         User user = this.userService.getByUsername(username);
-        if (user != null && user.getPassword().equals(password)) {
-            return new AuthenticationResponse(user, this.jwtService.getToken(username));
+        if (user == null) {
+            return new CommonResponse(ResponseCode.ERROR, "There is no such user");
         }
-        return new CommonResponse(ResponseCode.ERROR, "Some Error =(");
+        if (!user.getPassword().equals(password)) {
+            return new CommonResponse(ResponseCode.ERROR, "Wrong password");
+        }
+        return new AuthenticationResponse(user, this.jwtService.getToken(username));
     }
 
     @RequestMapping(value = "/validation", method = RequestMethod.GET)
     public CommonResponse validation(@RequestParam String token) {
         User user = this.userService.getByUsername(this.jwtService.getUsernameFromToken(token));
-        return user == null ? new CommonResponse(ResponseCode.ERROR, "Some Error =(") :  new ValidationResponse(user);
-
-    }
-
-    @RequestMapping(value = "/addUser", method = RequestMethod.POST)
-    public CommonResponse addUser(@RequestBody User user) {
-        try{
-            this.userService.save(user);
-            return new CommonResponse(ResponseCode.SUCCESS, "User succesfully added");
+        if (user == null) {
+            return new CommonResponse(ResponseCode.AUTHENTICATION_FAIL_ERROR, "There is no such user");
         }
-        catch (Exception ex){
-            return new CommonResponse(ResponseCode.ERROR, "Some Error =(");
-        }
+        return new ValidationResponse(user);
     }
 }

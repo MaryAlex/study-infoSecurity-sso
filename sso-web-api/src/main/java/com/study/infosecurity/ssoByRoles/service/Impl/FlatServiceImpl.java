@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-
 @Service("flatService")
 public class FlatServiceImpl implements FlatService {
 
@@ -35,7 +34,12 @@ public class FlatServiceImpl implements FlatService {
     }
 
     @Override
-    public boolean exists(Long id) {
+    public boolean isExists(Long id) {
         return this.flatRepository.existsById(id);
+    }
+
+    @Override
+    public boolean isExists(Flat flat) {
+        return this.isExists(flat.getId());
     }
 }

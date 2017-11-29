@@ -28,15 +28,21 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getByUsername(String username) {
-        return convertUserForDbToUser(this.userRepository.findByUsername(username).get(0));
+        List<UserForDB> users = this.userRepository.findByUsername(username);
+        if (users.isEmpty()) {
+            return null;
+        }
+        return convertUserForDbToUser(users.get(0));
     }
 
 
+    // TODO: Fix, when will do roles
     private User convertUserForDbToUser (UserForDB userForDB){
         List<Roles> roles = Arrays.asList(userForDB.getRoles().split("\\s*,\\s*")).stream().map(Roles::valueOf).collect(Collectors.toList());
         return  new User(userForDB.getId(), userForDB.getUsername(), userForDB.getPassword(), roles);
     }
 
+    // TODO: Fix, when will do roles
     private UserForDB convertUserToUserForDb (User user){
         List<String> roles = user.getRoles().stream().map(Roles::name).collect(Collectors.toList());
         return new UserForDB(user.getId(), user.getUsername(), user.getPassword(), String.join(",", roles));

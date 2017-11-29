@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-
 @Service("computerService")
 public class ComputerServiceImpl implements ComputerService {
 
@@ -35,7 +34,12 @@ public class ComputerServiceImpl implements ComputerService {
     }
 
     @Override
-    public boolean exists(Long id) {
+    public boolean isExists(Long id) {
         return this.computerRepository.existsById(id);
+    }
+
+    @Override
+    public boolean isExists(Computer computer) {
+        return this.isExists(computer.getId());
     }
 }

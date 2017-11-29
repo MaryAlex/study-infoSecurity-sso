@@ -1,13 +1,18 @@
 package com.study.infosecurity.ssoByRoles.model.dto
 
 import org.hibernate.validator.constraints.Length
-import javax.persistence.*
+import javax.persistence.Column
+import javax.persistence.Entity
+import javax.persistence.GeneratedValue
+import javax.persistence.GenerationType
+import javax.persistence.Id
 import javax.validation.constraints.NotEmpty
 
+// TODO: For God's sake... DELETE THIS SHIT!
 @Entity
 class UserForDB(
         @Id
-        @GeneratedValue(strategy = javax.persistence.GenerationType.AUTO)
+        @GeneratedValue(strategy = GenerationType.AUTO)
         var id: Long,
 
         @Column(name = "username", unique = false, length = 255)
@@ -22,5 +27,4 @@ class UserForDB(
         @Column(name = "roles", unique = false)
         @NotEmpty(message = "Roles please!")
         var roles: String
-
 )

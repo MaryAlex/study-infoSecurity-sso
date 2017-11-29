@@ -1,8 +1,8 @@
 import * as React from 'react';
-import Login from '@src/pages/login/login';
+import Login from '@src/app/pages/login/login';
 import { Route, Switch } from 'react-router';
-import Registration from '@src/pages/registration/registration';
-import { List } from '@src/pages/list/list';
+import Registration from '@src/app/pages/registration/registration';
+import { List } from '@src/app/pages/list/list';
 
 export class App extends React.Component {
     render() {

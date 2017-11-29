@@ -1,12 +1,12 @@
 import * as React from 'react';
 import './registration.css';
 import { Button, Checkbox, ControlLabel, FormControl, FormGroup } from 'react-bootstrap';
-import { RegistrationState } from '@src/pages/registration/RegistrationState';
+import { RegistrationState } from '@src/app/pages/registration/RegistrationState';
 import Roles = SSOByRolesDefinitions.Roles;
 import ResponseCode = SSOByRolesDefinitions.ResponseCode;
 import CommonResponse = SSOByRolesDefinitions.CommonResponse;
-import { IArgs } from '@src/services/HttpRequestService';
-import { RegistrationService } from '@src/pages/registration/RegistrationService';
+import { IArgs } from '@src/app/services/HttpRequestService';
+import { RegistrationService } from '@src/app/pages/registration/RegistrationService';
 import { withRouter } from 'react-router';
 
 interface IRegistrationProperties {
