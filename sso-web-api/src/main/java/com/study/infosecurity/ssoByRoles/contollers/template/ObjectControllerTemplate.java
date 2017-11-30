@@ -2,7 +2,6 @@ package com.study.infosecurity.ssoByRoles.contollers.template;
 
 import com.study.infosecurity.ssoByRoles.model.dto.User;
 import com.study.infosecurity.ssoByRoles.model.poko.constant.ResponseCode;
-import com.study.infosecurity.ssoByRoles.model.poko.constant.Roles;
 import com.study.infosecurity.ssoByRoles.model.poko.response.GetAllResponse;
 import com.study.infosecurity.ssoByRoles.model.poko.response.CommonResponse;
 import com.study.infosecurity.ssoByRoles.service.IObjectService;
@@ -72,10 +71,6 @@ public class ObjectControllerTemplate<T> {
     }
 
     private boolean isHasAccess(User user) {
-        Roles item = user.getRoles().stream()
-                .filter(e -> e.equals(Roles.COMPUTER_WRITE))
-                .findFirst()
-                .orElse(null);
-        return item != null;
+        return user != null;
     }
 }

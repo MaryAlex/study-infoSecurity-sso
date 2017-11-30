@@ -9,27 +9,32 @@ import javax.persistence.GenerationType
 import javax.persistence.Id
 import javax.persistence.JoinColumn
 import javax.persistence.ManyToOne
-import javax.validation.constraints.NotEmpty
-
 
 @Entity
-data class Flat(
+data class TypeCRUD(
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
         var id: Long,
 
-        @Column(name = "numberOfRooms", unique = false)
-        @NotEmpty(message = "Please enter number Of Rooms")
-        var numbersOfRoom: Number,
-
-        @Column(name = "square", unique = false)
-        var square: Number,
-
-        @Column(name = "description", unique = false)
-        var description: String,
-
         @ManyToOne(cascade = arrayOf(CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH),
                 fetch = FetchType.EAGER)
         @JoinColumn(name = "type_id")
-        var type: Type
+        var type: Type,
+
+        @ManyToOne(cascade = arrayOf(CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH),
+                fetch = FetchType.LAZY)
+        @JoinColumn(name = "role_id")
+        var role: Role,
+
+        @Column(name = "create_access", unique = false)
+        var createAccess: Boolean,
+
+        @Column(name = "read_access", unique = false)
+        var readAccess: Boolean,
+
+        @Column(name = "update_access", unique = false)
+        var updateAccess: Boolean,
+
+        @Column(name = "delete_access", unique = false)
+        var deleteAccess: Boolean
 )

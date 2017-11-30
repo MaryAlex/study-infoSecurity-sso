@@ -1,14 +1,18 @@
 package com.study.infosecurity.ssoByRoles.model.dto
 
+import javax.persistence.CascadeType
 import javax.persistence.Column
 import javax.persistence.Entity
+import javax.persistence.FetchType
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
+import javax.persistence.JoinColumn
+import javax.persistence.ManyToOne
 import javax.validation.constraints.NotEmpty
 
 @Entity
-class Computer (
+data class Computer(
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
         var id: Long,
@@ -23,6 +27,11 @@ class Computer (
         @Column(name = "battery", unique = false)
         var battery: String,
 
-        @Column(name = "proccesor", unique = false)
-        var proccesor: String
+        @Column(name = "processor", unique = false)
+        var processor: String,
+
+        @ManyToOne(cascade = arrayOf(CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH),
+                fetch = FetchType.EAGER)
+        @JoinColumn(name = "type_id")
+        var type: Type
 )

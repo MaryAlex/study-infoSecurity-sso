@@ -1,4 +1,4 @@
-// Generated using typescript-generator version 1.28.343 on 2017-11-28 23:54:06.
+// Generated using typescript-generator version 1.28.343 on 2017-11-30 10:52:06.
 
 declare namespace SSOByRolesDefinitions {
 
@@ -7,7 +7,8 @@ declare namespace SSOByRolesDefinitions {
         firm: string;
         model: string;
         battery: string;
-        proccesor: string;
+        processor: string;
+        type: Type;
     }
 
     interface Flat {
@@ -15,6 +16,7 @@ declare namespace SSOByRolesDefinitions {
         numbersOfRoom: any;
         square: any;
         description: string;
+        type: Type;
     }
 
     interface Motorcycle {
@@ -24,20 +26,36 @@ declare namespace SSOByRolesDefinitions {
         width: any;
         height: any;
         displacement: string;
+        type: Type;
+    }
+
+    interface Role {
+        id: number;
+        name: string;
+        typeCRUDs: TypeCRUD[];
+    }
+
+    interface Type {
+        id: number;
+        name: string;
+        belonging: ObjectNames;
+    }
+
+    interface TypeCRUD {
+        id: number;
+        type: Type;
+        role: Role;
+        createAccess: boolean;
+        readAccess: boolean;
+        updateAccess: boolean;
+        deleteAccess: boolean;
     }
 
     interface User {
         id: number;
         username: string;
         password: string;
-        roles: Roles[];
-    }
-
-    interface UserForDB {
-        id: number;
-        username: string;
-        password: string;
-        roles: string;
+        roles: Role[];
     }
 
     interface AuthenticationResponse extends CommonResponse {
@@ -58,17 +76,16 @@ declare namespace SSOByRolesDefinitions {
         user: User;
     }
 
+    const enum ObjectNames {
+        COMPUTER = 0,
+        FLAT = 1,
+        MOTORCYCLE = 2,
+    }
+
     const enum ResponseCode {
         SUCCESS = 0,
         ERROR = 1,
         AUTHENTICATION_FAIL_ERROR = 2,
-    }
-
-    const enum Roles {
-        ADMIN = 0,
-        COMPUTER_WRITE = 1,
-        FLAT_WRITE = 2,
-        MOTORCYCLE_WRITE = 3,
     }
 
 }
