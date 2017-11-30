@@ -22,12 +22,11 @@ public class UserController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public CommonResponse addUser(@RequestBody User user) {
-        try{
+        try {
             this.userService.save(user);
             return new CommonResponse();
-        }
-        catch (Exception exception){
-            return new CommonResponse(ResponseCode.ERROR, "Error while adding user" + exception.getMessage());
+        } catch (Exception exception) {
+            return new CommonResponse(ResponseCode.ERROR, "Error while adding user:" + exception.getCause().getMessage());
         }
     }
 }

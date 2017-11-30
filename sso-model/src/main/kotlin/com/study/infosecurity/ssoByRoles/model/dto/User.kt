@@ -19,7 +19,7 @@ data class User(
         @GeneratedValue(strategy = GenerationType.AUTO)
         var id: Long,
 
-        @Column(name = "username", unique = false, length = 255)
+        @Column(name = "username", unique = true, length = 255)
         @NotEmpty(message = "Please inter your username")
         var username: String,
 

@@ -1,20 +1,6 @@
+import { AlertObject } from '@src/app/constants/AlertObject';
+
 export class LoginState {
-    constructor(public username: string = '', public password: string = '') {
-    }
-
-    withPassword = (password: string): LoginState => {
-        const to = this.copy();
-        to.password = password;
-        return to;
-    }
-
-    withUsername = (username: string): LoginState => {
-        const to = this.copy();
-        to.username = username;
-        return to;
-    }
-
-    private copy(): LoginState {
-        return new LoginState(this.username, this.password);
+    constructor(public username: string = '', public password: string = '', public alert: AlertObject = new AlertObject()) {
     }
 }
