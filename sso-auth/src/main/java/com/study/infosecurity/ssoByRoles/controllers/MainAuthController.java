@@ -5,6 +5,7 @@ import com.study.infosecurity.ssoByRoles.model.poko.constant.ResponseCode;
 import com.study.infosecurity.ssoByRoles.model.poko.response.AuthenticationResponse;
 import com.study.infosecurity.ssoByRoles.model.poko.response.CommonResponse;
 import com.study.infosecurity.ssoByRoles.model.poko.response.ValidationResponse;
+import com.study.infosecurity.ssoByRoles.security.SecurityUtils;
 import com.study.infosecurity.ssoByRoles.service.JwtService;
 import com.study.infosecurity.ssoByRoles.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,7 @@ public class MainAuthController {
         if (user == null) {
             return new CommonResponse(ResponseCode.ERROR, "There is no such user");
         }
-        if (!user.getPassword().equals(password)) {
+        if (!user.getPassword().equals(SecurityUtils.getHash(password))) {
             return new CommonResponse(ResponseCode.ERROR, "Wrong password");
         }
         return new AuthenticationResponse(user, this.jwtService.getToken(username));
