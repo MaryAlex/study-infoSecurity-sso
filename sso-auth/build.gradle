@@ -9,9 +9,16 @@ dependencies {
 task authServer doLast {
     bootRun
 }
+task authServerWithDataInit doLast {
+    bootRun { args = ["--spring.profiles.active=authServerWithDataInit"] }
+}
 
 configure(authServer) {
     group "application"
 }
+configure(authServerWithDataInit) {
+    group "init"
+}
 
 authServer.finalizedBy bootRun
+authServerWithDataInit.finalizedBy bootRun
