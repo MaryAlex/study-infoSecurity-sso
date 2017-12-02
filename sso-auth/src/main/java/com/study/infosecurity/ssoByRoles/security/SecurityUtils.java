@@ -13,11 +13,19 @@ public class SecurityUtils {
             MessageDigest messageDigest = MessageDigest.getInstance(SHA_256);
             messageDigest.reset();
             messageDigest.update(string.getBytes());
-            byte[] digest = messageDigest.digest();
-            hashedString = new String(digest);
+            byte[] bytes = messageDigest.digest();
+            hashedString = byteArrayToString(bytes);
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
         return hashedString;
+    }
+
+    private static String byteArrayToString(byte[] bytes) {
+        StringBuilder sb = new StringBuilder();
+        for (byte aByte : bytes) {
+            sb.append(Integer.toString((aByte & 0xff) + 0x100, 16).substring(1));
+        }
+        return sb.toString();
     }
 }

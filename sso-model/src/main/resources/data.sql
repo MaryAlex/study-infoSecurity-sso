@@ -40,11 +40,11 @@ insert into sso.typeCRUD (id, type_id, role_id, create_Access, read_Access, upda
 (23, 5, 2, TRUE, TRUE, TRUE, FALSE), (24, 6, 2, TRUE, TRUE, TRUE, FALSE), (25, 7, 2, TRUE, TRUE, TRUE, FALSE), (26, 8, 2, TRUE, TRUE, TRUE, FALSE), (27, 9, 2, TRUE, TRUE, TRUE, FALSE);
 
 -- Admin user
-insert into sso.user (id, username, password) values (1, "admin", "�iv�A���M�߱g��s�K��o*�H�");
+insert into sso.user (id, username, password) values (1, "admin", "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918");
 insert into sso.user_role (user_id, role_id) values (1, 1);
 -- SuperUser
-insert into sso.user (id, username, password) values (2, "SuperUser", "�+4�G��1I�i���X��{ݫ���C�");
+insert into sso.user (id, username, password) values (2, "super", "73d1b1b1bc1dabfb97f216d897b7968e44b06457920f00f2dc6c1ed3be25ad4c");
 insert into sso.user_role (user_id, role_id) values (2, 2);
 -- User
-insert into sso.user (id, username, password) values (3, "User", "��~|���s��;�Tz�Z�X�'����+�r�M");
+insert into sso.user (id, username, password) values (3, "user", "04f8996da763b7a969b1028ee3007569eaf3a635486ddab211d512c85b9df8fb");
 insert into sso.user_role (user_id, role_id) values (3, 3);
