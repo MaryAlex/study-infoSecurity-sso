@@ -34,6 +34,11 @@ public class ComputerServiceImpl implements ComputerService {
     }
 
     @Override
+    public void deleteByObject(Computer computer) {
+        this.deleteById(computer.getId());
+    }
+
+    @Override
     public boolean isExists(Long id) {
         return this.computerRepository.existsById(id);
     }
@@ -41,5 +46,10 @@ public class ComputerServiceImpl implements ComputerService {
     @Override
     public boolean isExists(Computer computer) {
         return this.isExists(computer.getId());
+    }
+
+    @Override
+    public Long getTypeID(Computer computer) {
+        return computer.getType().getId();
     }
 }

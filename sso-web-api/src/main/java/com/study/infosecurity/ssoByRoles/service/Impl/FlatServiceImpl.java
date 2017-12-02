@@ -34,6 +34,11 @@ public class FlatServiceImpl implements FlatService {
     }
 
     @Override
+    public void deleteByObject(Flat flat) {
+        this.deleteById(flat.getId());
+    }
+
+    @Override
     public boolean isExists(Long id) {
         return this.flatRepository.existsById(id);
     }
@@ -41,5 +46,10 @@ public class FlatServiceImpl implements FlatService {
     @Override
     public boolean isExists(Flat flat) {
         return this.isExists(flat.getId());
+    }
+
+    @Override
+    public Long getTypeID(Flat flat) {
+        return flat.getType().getId();
     }
 }

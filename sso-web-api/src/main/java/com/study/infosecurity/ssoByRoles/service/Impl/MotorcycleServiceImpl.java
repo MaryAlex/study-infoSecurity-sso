@@ -34,6 +34,11 @@ public class MotorcycleServiceImpl implements MotorcycleService {
     }
 
     @Override
+    public void deleteByObject(Motorcycle motorcycle) {
+        this.deleteById(motorcycle.getId());
+    }
+
+    @Override
     public boolean isExists(Long id) {
         return this.motorcycleRepository.existsById(id);
     }
@@ -41,5 +46,10 @@ public class MotorcycleServiceImpl implements MotorcycleService {
     @Override
     public boolean isExists(Motorcycle motorcycle) {
         return this.isExists(motorcycle.getId());
+    }
+
+    @Override
+    public Long getTypeID(Motorcycle motorcycle) {
+        return motorcycle.getType().getId();
     }
 }
