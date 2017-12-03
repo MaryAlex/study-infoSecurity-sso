@@ -13,6 +13,12 @@ class MainAuthEndpoints {
     validation = `${AUTH_API}/validation`;
 }
 
+class TypesEndpoints {
+    TYPES_CONTROLLER = '/types';
+    getAll = `${COMPUTER_API}${this.TYPES_CONTROLLER}/getAll`;
+    getByObjectName = `${COMPUTER_API}${this.TYPES_CONTROLLER}/getByObjectName`;
+}
+
 class AccountEndpoints {
     USER_CONTROLLER = '/user';
     add = `${AUTH_API}${this.USER_CONTROLLER}/add`;
@@ -34,4 +40,5 @@ export class Endpoints {
     static computers = new ObjectEndpoints(COMPUTER_API, COMPUTER_TYPE);
     static flats = new ObjectEndpoints(FLAT_API, FLAT_TYPE);
     static motorcycles = new ObjectEndpoints(MOTORCYCLE_API, MOTORCYCLE_TYPE);
+    static types = new TypesEndpoints();
 }

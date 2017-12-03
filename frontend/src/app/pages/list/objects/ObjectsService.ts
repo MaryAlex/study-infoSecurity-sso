@@ -22,4 +22,7 @@ export class ObjectsService {
 
     static add = (type: ObjectNames, object: ObjectTypes): HttpResponse<CommonResponse> =>
         HttpRequestService.post(ObjectsService.typeToUrl.get(type).add, object)
+
+    static getTypes = (objectName: ObjectNames): HttpResponse<CommonResponse> =>
+        HttpRequestService.get(Endpoints.types.getByObjectName, { objectName })
 }

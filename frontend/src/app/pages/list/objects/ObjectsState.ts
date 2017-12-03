@@ -1,8 +1,10 @@
 import * as _ from 'lodash';
 import { ObjectTypes } from '@src/types/types';
+import Type = SSOByRolesDefinitions.Type;
 
 export class ObjectsState {
-    constructor(public objects: ObjectTypes[] = [], public isEditModeFor: string = '', public isCreateMode: boolean = false) {
+    constructor(public objects: ObjectTypes[] = [], public isEditModeFor: string = '', public isCreateMode: boolean = false,
+                public types: Type[] = []) {
 
     }
 
@@ -18,6 +20,7 @@ export class ObjectsState {
         return { objects };
     }
 
+    setTypes = (types: Type[]) => ({ types });
     setEditStateFor = (isEditModeFor: string) => ({ isEditModeFor });
     setCreateMode = (isCreateMode: boolean) => ({ isCreateMode });
 }

@@ -8,7 +8,6 @@ import { IArgs } from '@src/app/services/HttpRequestService';
 import GetAllResponse = SSOByRolesDefinitions.GetAllResponse;
 import { ObjectsState } from '@src/app/pages/list/objects/ObjectsState';
 import { ObjectTypes } from '@src/types/types';
-import Type = SSOByRolesDefinitions.Type;
 import { Button, Col, Grid, Row } from 'react-bootstrap';
 import CommonResponse = SSOByRolesDefinitions.CommonResponse;
 import ResponseCode = SSOByRolesDefinitions.ResponseCode;
@@ -16,6 +15,8 @@ import { ID_KEY, TYPE_KEY } from '@src/app/constants/Constants';
 import { EditRow } from '@src/app/pages/list/objects/editRow/editRow';
 import { getForEachHandlerNodeType, newObjectTypes } from '@src/app/constants/ObjectsUtils';
 import { isUserCanDeleteType, isUserCanEditType, isUserHasCreateRole } from '@src/app/constants/RolesUtils';
+import Type = SSOByRolesDefinitions.Type;
+import AddResponse = SSOByRolesDefinitions.AddResponse;
 
 export interface IObjectsProps extends RouteComponentProps<any> {
     object: ObjectNames;
@@ -33,6 +34,9 @@ export class Objects extends React.Component<IObjectsProps, ObjectsState> {
             .subscribe((response: IArgs<GetAllResponse<ObjectTypes>>) => {
                 this.setState({ objects: response.data.objects });
             });
+        ObjectsService.getTypes(this.props.object).subscribe((response: IArgs<GetAllResponse<Type>>) => {
+            this.setState(this.state.setTypes(response.data.objects));
+        });
     }
 
     render() {
@@ -60,16 +64,14 @@ export class Objects extends React.Component<IObjectsProps, ObjectsState> {
         if (!isUserHasCreateRole(this.props.user)) {
             return table;
         }
-        if (this.state.isCreateMode) {
-            return [...table, (
+        return this.state.isCreateMode ? [...table, (
                 <EditRow key="createRow"
                          cancel={this.cancelCreateNew}
+                         types={this.state.types}
                          object={newObjectTypes(this.props.object)}
                          updateObject={this.addObject}/>
-            )];
-        } else {
-            return [...table, <Button key="createButton" bsStyle="primary" onClick={this.openCreateNew}>Create</Button>];
-        }
+            )] :
+            [...table, <Button key="createButton" bsStyle="primary" onClick={this.openCreateNew}>Create</Button>];
     }
 
     private getHeader = (): React.ReactNode => {
@@ -85,14 +87,15 @@ export class Objects extends React.Component<IObjectsProps, ObjectsState> {
         row.push(this.getCol((object[TYPE_KEY] as Type).name));
         row = this.addEditButton(row, object);
         row = this.addDeleteButton(row, object);
-        return this.state.isEditModeFor === object[ID_KEY].toString() ?
-            <EditRow key={object[ID_KEY]} object={object} updateObject={this.updateObject} cancel={this.cancelUpdate}/> :
+        return object[ID_KEY] && this.state.isEditModeFor === object[ID_KEY].toString() ?
+            <EditRow key={object[ID_KEY]} types={this.state.types} object={object} updateObject={this.updateObject}
+                     cancel={this.cancelUpdate}/> :
             <Row key={object[ID_KEY]}>{row}</Row>;
     }
 
     private getCol = (text: string): React.ReactNode => {
         return (
-            <Col className="my-row" key={text} xs={12} md={2}>{text}</Col>
+            <Col className="my-row" xs={12} md={2}>{text}</Col>
         );
     }
 
@@ -128,9 +131,9 @@ export class Objects extends React.Component<IObjectsProps, ObjectsState> {
     }
 
     private addObject = (object: ObjectTypes): void => {
-        ObjectsService.add(this.props.object, object).subscribe((response: IArgs<CommonResponse>) => {
+        ObjectsService.add(this.props.object, object).subscribe((response: IArgs<AddResponse>) => {
             if (response.data.responseCode === ResponseCode.SUCCESS) {
-                this.setState(this.state.addObject(this.state.objects, object));
+                this.setState(this.state.addObject(this.state.objects, Object.assign({}, object, { id: response.data.id })));
             } else {
                 console.error(response.data.errorMessage);
             }

@@ -52,4 +52,9 @@ public class MotorcycleServiceImpl implements MotorcycleService {
     public Long getTypeID(Motorcycle motorcycle) {
         return motorcycle.getType().getId();
     }
+
+    @Override
+    public Long getID(Motorcycle object) {
+        return object.getId();
+    }
 }

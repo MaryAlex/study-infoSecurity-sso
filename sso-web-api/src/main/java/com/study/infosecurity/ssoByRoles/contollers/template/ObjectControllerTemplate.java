@@ -2,6 +2,7 @@ package com.study.infosecurity.ssoByRoles.contollers.template;
 
 import com.study.infosecurity.ssoByRoles.model.dto.User;
 import com.study.infosecurity.ssoByRoles.model.poko.constant.ResponseCode;
+import com.study.infosecurity.ssoByRoles.model.poko.response.AddResponse;
 import com.study.infosecurity.ssoByRoles.model.poko.response.GetAllResponse;
 import com.study.infosecurity.ssoByRoles.model.poko.response.CommonResponse;
 import com.study.infosecurity.ssoByRoles.service.IObjectService;
@@ -30,7 +31,7 @@ public class ObjectControllerTemplate<T> {
         try {
             if (RoleUtils.isHasCreateAccess(this.objectService.getTypeID(object), user)) {
                 this.objectService.save(object);
-                return new CommonResponse();
+                return new AddResponse(this.objectService.getID(object));
             }
             return getAccessDeniedResponse();
         } catch (Exception exception) {

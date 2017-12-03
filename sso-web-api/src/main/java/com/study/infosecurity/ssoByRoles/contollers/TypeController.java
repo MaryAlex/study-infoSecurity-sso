@@ -21,8 +21,8 @@ public class TypeController {
         this.typeService = typeService;
     }
 
-    @RequestMapping(value = "/getAllTypes", method = RequestMethod.GET)
-    public CommonResponse getAllTypes() {
+    @RequestMapping(value = "/getAll", method = RequestMethod.GET)
+    public CommonResponse getAll() {
         try {
             return new GetAllResponse<>(this.typeService.findAll());
         } catch (Exception exception) {
@@ -30,10 +30,11 @@ public class TypeController {
         }
     }
 
-    @RequestMapping(value = "/getTypesByObjectName", method = RequestMethod.GET)
-    public CommonResponse getTypesByObjectName(@RequestParam ObjectNames objectName) {
+    @RequestMapping(value = "/getByObjectName", method = RequestMethod.GET)
+    public CommonResponse getByObjectName(@RequestParam Integer objectName) {
         try {
-            return new GetAllResponse<>(this.typeService.findByBelonging(objectName));
+            // TODO: Fix this
+            return new GetAllResponse<>(this.typeService.findByBelonging(ObjectNames.values()[objectName]));
         } catch (Exception exception) {
             return new CommonResponse(ResponseCode.ERROR, "Error while do findTypesByObjectName:" + exception.getMessage());
         }
