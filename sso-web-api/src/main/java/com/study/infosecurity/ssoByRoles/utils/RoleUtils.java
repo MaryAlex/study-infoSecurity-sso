@@ -6,6 +6,7 @@ import com.study.infosecurity.ssoByRoles.model.dto.User;
 import com.study.infosecurity.ssoByRoles.model.poko.constant.CRUD;
 
 public class RoleUtils {
+    private static String ADMIN = "Admin";
 
     public static boolean isHasCreateAccess(Long type_id, User user) {
         return isHasAccess(type_id, user, CRUD.CREATE);
@@ -21,6 +22,10 @@ public class RoleUtils {
 
     public static boolean isHasDeleteAccess(Long type_id, User user) {
         return isHasAccess(type_id, user, CRUD.DELETE);
+    }
+
+    public static boolean isHasAdminAccess(User user) {
+        return user.getRoles().stream().filter(role -> role.getName().equals(ADMIN)).findFirst().orElse(null) != null;
     }
 
     private static boolean isHasAccess(Long type_id, User user, CRUD operation) {
