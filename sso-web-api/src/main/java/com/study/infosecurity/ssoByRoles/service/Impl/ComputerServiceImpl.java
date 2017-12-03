@@ -52,4 +52,9 @@ public class ComputerServiceImpl implements ComputerService {
     public Long getTypeID(Computer computer) {
         return computer.getType().getId();
     }
+
+    @Override
+    public Long getID(Computer object) {
+        return object.getId();
+    }
 }

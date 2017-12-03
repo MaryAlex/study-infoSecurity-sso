@@ -10,4 +10,5 @@ public interface IObjectService<T> {
     boolean isExists(Long id);
     boolean isExists(T object);
     Long getTypeID(T object);
+    Long getID(T object);
 }

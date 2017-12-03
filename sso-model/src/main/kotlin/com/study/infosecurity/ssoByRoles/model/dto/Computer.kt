@@ -30,8 +30,7 @@ data class Computer(
         @Column(name = "processor", unique = false)
         var processor: String,
 
-        @ManyToOne(cascade = arrayOf(CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH),
-                fetch = FetchType.EAGER)
+        @ManyToOne(cascade = arrayOf(CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH), fetch = FetchType.EAGER)
         @JoinColumn(name = "type_id")
         var type: Type
 )

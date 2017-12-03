@@ -1,4 +1,4 @@
-// Generated using typescript-generator version 1.28.343 on 2017-12-03 12:37:21.
+// Generated using typescript-generator version 1.28.343 on 2017-12-03 20:04:14.
 
 declare namespace SSOByRolesDefinitions {
 
@@ -56,6 +56,10 @@ declare namespace SSOByRolesDefinitions {
         username: string;
         password: string;
         roles: Role[];
+    }
+
+    interface AddResponse extends CommonResponse {
+        id: number;
     }
 
     interface AuthenticationResponse extends CommonResponse {

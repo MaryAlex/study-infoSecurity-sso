@@ -1,10 +1,30 @@
 import * as React from 'react';
 import Header from '@src/app/pages/list/header/header';
 import { ListBody } from '@src/app/pages/list/listBody/listBody';
-import { Route, Switch } from "react-router";
+import { Route, Switch, withRouter } from 'react-router';
 import Admin from "@src/app/pages/admin/admin";
+import { CookiesService } from '@src/app/services/CookiesService';
+import { Endpoints, LOGIN_URL } from '@src/app/constants/Endpoints';
+import { CookieObject } from 'react-cookie';
+import Axios from 'axios';
+import { IArgs } from '@src/app/services/HttpRequestService';
+import ValidationResponse = SSOByRolesDefinitions.ValidationResponse;
+import { connect, Dispatch } from 'react-redux';
+import User = SSOByRolesDefinitions.User;
+import { updateUser } from '@src/app/actions/UserActions';
 
-export class List extends React.Component {
+interface IListProps {
+    dispatch: Dispatch<User>;
+    history?: string[];
+}
+
+@(connect() as any)
+class List extends React.Component<IListProps> {
+    constructor(props: IListProps) {
+        super(props);
+        this.checkToken();
+    }
+
     render() {
         return (
             <div>
@@ -16,4 +36,22 @@ export class List extends React.Component {
             </div>
         );
     }
+
+    private checkToken = (): void => {
+        const token = CookiesService.getToken();
+        if (!!token) {
+            this.initUserFromToken(token);
+        } else {
+            this.props.history.push(LOGIN_URL);
+        }
+    }
+
+    private initUserFromToken = (token: CookieObject): void => {
+        Axios(Endpoints.mainAuth.validation, { method: 'get', params: { token } })
+            .then((response: IArgs<ValidationResponse>) => {
+                this.props.dispatch(updateUser(response.data.user));
+            });
+    }
 }
+
+export default withRouter(List);

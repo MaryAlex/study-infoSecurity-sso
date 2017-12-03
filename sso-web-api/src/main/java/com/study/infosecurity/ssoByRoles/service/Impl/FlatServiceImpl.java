@@ -52,4 +52,9 @@ public class FlatServiceImpl implements FlatService {
     public Long getTypeID(Flat flat) {
         return flat.getType().getId();
     }
+
+    @Override
+    public Long getID(Flat object) {
+        return object.getId();
+    }
 }
