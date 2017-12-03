@@ -23,6 +23,7 @@ export class Header extends React.Component<IHeaderProps> {
                     <Button bsSize="large" href="/flats">Flats</Button>
                     <Button bsSize="large" href="/motorcycles">Motorcycles</Button>
                 </ButtonToolbar>
+                <Button href="/administration">Admin</Button>
                 <Button className="header_logout" onClick={this.logout}>Logout</Button>
             </div>
         );

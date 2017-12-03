@@ -28,9 +28,16 @@ export class ObjectEndpoints {
     }
 }
 
+export class AdminEndpoints{
+    ADMIN_CONTROLLER = '/admin';
+    getAllUsers = `${COMPUTER_API}${this.ADMIN_CONTROLLER}/getAllUsers`;
+    getAllRoles = `${COMPUTER_API}${this.ADMIN_CONTROLLER}/getAllRoles`;
+}
+
 export class Endpoints {
     static mainAuth = new MainAuthEndpoints();
     static accounts = new AccountEndpoints();
+    static admin = new AdminEndpoints();
     static computers = new ObjectEndpoints(COMPUTER_API, COMPUTER_TYPE);
     static flats = new ObjectEndpoints(FLAT_API, FLAT_TYPE);
     static motorcycles = new ObjectEndpoints(MOTORCYCLE_API, MOTORCYCLE_TYPE);
