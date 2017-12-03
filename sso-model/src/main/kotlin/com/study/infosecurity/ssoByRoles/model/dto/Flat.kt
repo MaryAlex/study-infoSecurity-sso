@@ -20,10 +20,10 @@ data class Flat(
 
         @Column(name = "numberOfRooms", unique = false)
         @NotEmpty(message = "Please enter number Of Rooms")
-        var numbersOfRoom: Number,
+        var numbersOfRoom: Int,
 
         @Column(name = "square", unique = false)
-        var square: Number,
+        var square: Int,
 
         @Column(name = "description", unique = false)
         var description: String,

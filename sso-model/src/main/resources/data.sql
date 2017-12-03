@@ -30,21 +30,21 @@ insert into sso.motorcycle (id,  firm, model, width, height, displacement, type_
 insert into sso.role (id, name) values (1, "Admin"), (2, "SuperUser"), (3, "User");
 
 -- CRUD for Admin
-insert into sso.typeCRUD (id, type_id, role_id, create_Access, read_Access, update_Access, delete_Access) values (1, 1, 1, TRUE, TRUE, TRUE, TRUE), (2, 2, 1, TRUE, TRUE, TRUE, TRUE), (3, 3, 1, TRUE, TRUE, TRUE, TRUE), (4, 4, 1, TRUE, TRUE, TRUE, TRUE),
+insert into sso.typecrud (id, type_id, role_id, create_Access, read_Access, update_Access, delete_Access) values (1, 1, 1, TRUE, TRUE, TRUE, TRUE), (2, 2, 1, TRUE, TRUE, TRUE, TRUE), (3, 3, 1, TRUE, TRUE, TRUE, TRUE), (4, 4, 1, TRUE, TRUE, TRUE, TRUE),
 (5, 5, 1, TRUE, TRUE, TRUE, TRUE), (6, 6, 1, TRUE, TRUE, TRUE, TRUE), (7, 7, 1, TRUE, TRUE, TRUE, TRUE), (8, 8, 1, TRUE, TRUE, TRUE, TRUE), (9, 9, 1, TRUE, TRUE, TRUE, TRUE);
 -- CRUD for User
-insert into sso.typeCRUD (id, type_id, role_id, create_Access, read_Access, update_Access, delete_Access) values (10, 1, 3, FALSE, TRUE, FALSE, FALSE), (11, 2, 3, FALSE, TRUE, FALSE, FALSE), (12, 3, 3, TRUE, TRUE, FALSE, FALSE), (13, 4, 3, TRUE, TRUE, FALSE, FALSE),
+insert into sso.typecrud (id, type_id, role_id, create_Access, read_Access, update_Access, delete_Access) values (10, 1, 3, FALSE, TRUE, FALSE, FALSE), (11, 2, 3, FALSE, TRUE, FALSE, FALSE), (12, 3, 3, TRUE, TRUE, FALSE, FALSE), (13, 4, 3, TRUE, TRUE, FALSE, FALSE),
 (14, 5, 3, TRUE, TRUE, FALSE, FALSE), (15, 6, 3, TRUE, TRUE, FALSE, FALSE), (16, 7, 3, TRUE, TRUE, FALSE, FALSE), (17, 8, 3, TRUE, TRUE, FALSE, FALSE), (18, 9, 3, TRUE, TRUE, FALSE, FALSE);
 -- CRUD for SuperUser
-insert into sso.typeCRUD (id, type_id, role_id, create_Access, read_Access, update_Access, delete_Access) values (19, 1, 2, TRUE, TRUE, TRUE, FALSE), (20, 2, 2, TRUE, TRUE, TRUE, FALSE), (21, 3, 2, TRUE, TRUE, TRUE, FALSE), (22, 4, 2, TRUE, TRUE, TRUE, FALSE),
+insert into sso.typecrud (id, type_id, role_id, create_Access, read_Access, update_Access, delete_Access) values (19, 1, 2, TRUE, TRUE, TRUE, FALSE), (20, 2, 2, TRUE, TRUE, TRUE, FALSE), (21, 3, 2, TRUE, TRUE, TRUE, FALSE), (22, 4, 2, TRUE, TRUE, TRUE, FALSE),
 (23, 5, 2, TRUE, TRUE, TRUE, FALSE), (24, 6, 2, TRUE, TRUE, TRUE, FALSE), (25, 7, 2, TRUE, TRUE, TRUE, FALSE), (26, 8, 2, TRUE, TRUE, TRUE, FALSE), (27, 9, 2, TRUE, TRUE, TRUE, FALSE);
 
 -- Admin user
-insert into sso.user (id, username, password) values (1, "admin", "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918");
+insert into sso.user (id, username, password) values (1, "admin", "c697655410415d908d4de15f1679873c4b881f6f2a448918");
 insert into sso.user_role (user_id, role_id) values (1, 1);
 -- SuperUser
-insert into sso.user (id, username, password) values (2, "super", "73d1b1b1bc1dabfb97f216d897b7968e44b06457920f00f2dc6c1ed3be25ad4c");
+insert into sso.user (id, username, password) values (2, "super", "73111c1dbb72168776e440645720f002c6c1e3e25d4c");
 insert into sso.user_role (user_id, role_id) values (2, 2);
 -- User
-insert into sso.user (id, username, password) values (3, "user", "04f8996da763b7a969b1028ee3007569eaf3a635486ddab211d512c85b9df8fb");
+insert into sso.user (id, username, password) values (3, "user", "04896d7637969102e3007569a3635486da21151285bd8b");
 insert into sso.user_role (user_id, role_id) values (3, 3);

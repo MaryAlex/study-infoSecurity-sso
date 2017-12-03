@@ -2,10 +2,10 @@ buildscript {
     ext {
         spring = "4.3.2.RELEASE"
         springBootVersion = '2.0.0.M5'
-        kotlinVersion = '1.1.4-3'
+        kotlinVersion = '1.2.0'
         typescriptGenerator = "1.28.343"
         jackson = "2.8.2"
-        jacksonKoltin = "2.8.9"
+        jacksonKoltin = "2.9.2"
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")

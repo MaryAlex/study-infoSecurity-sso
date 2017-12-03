@@ -5,6 +5,8 @@ const MOTORCYCLE_API = '/motorcycleApi';
 const COMPUTER_TYPE = '/computer';
 const FLAT_TYPE = '/flat';
 const MOTORCYCLE_TYPE = '/motorcycle';
+export const MAIN_URL = '/';
+export const LOGIN_URL = '/login';
 
 class MainAuthEndpoints {
     authentication = `${AUTH_API}/authentication`;
@@ -16,7 +18,7 @@ class AccountEndpoints {
     add = `${AUTH_API}${this.USER_CONTROLLER}/add`;
 }
 
-class ObjectEndpoints {
+export class ObjectEndpoints {
     getAll = `${this.apiType}${this.objectType}/getAll`;
     add = `${this.apiType}${this.objectType}/add`;
     update = `${this.apiType}${this.objectType}/update`;

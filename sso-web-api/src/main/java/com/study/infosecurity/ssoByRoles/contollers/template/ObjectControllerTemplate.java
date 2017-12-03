@@ -38,7 +38,7 @@ public class ObjectControllerTemplate<T> {
         }
     }
 
-    @RequestMapping(value = "/update", method = RequestMethod.GET)
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
     public CommonResponse update(@RequestAttribute User user, @RequestBody T object) {
         try {
             if (RoleUtils.isHasUpdateAccess(this.objectService.getTypeID(object), user)) {
@@ -54,7 +54,7 @@ public class ObjectControllerTemplate<T> {
         }
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public CommonResponse delete(@RequestAttribute User user, @RequestBody T object) {
         try {
             if (RoleUtils.isHasDeleteAccess(this.objectService.getTypeID(object), user)) {

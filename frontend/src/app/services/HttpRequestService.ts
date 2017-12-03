@@ -11,17 +11,18 @@ export interface IArgs<T> extends AxiosResponse<T> {
     data: T;
 }
 
+//TODO: add case when we get 'red' answer
 export class HttpRequestService {
-    static get = (url: string, params?: any): HttpResponse<CommonResponse> =>
+    static get = <T extends CommonResponse>(url: string, params?: any): HttpResponse<T> =>
         fromPromise(Axios(url, HttpRequestService.withToken({ method: 'get', params }))
             .then(HttpRequestService.responsePreHandle))
 
-    static post = (url: string, data?: any): HttpResponse<CommonResponse> =>
+    static post = <T extends CommonResponse>(url: string, data?: any): HttpResponse<T> =>
         fromPromise(Axios(url, HttpRequestService.withToken({ method: 'post', data }))
             .then(HttpRequestService.responsePreHandle))
 
-    private static responsePreHandle = (response: IArgs<CommonResponse>) => {
-        if (response.data.responseCode === ResponseCode.ERROR) {
+    private static responsePreHandle = <T extends CommonResponse>(response: IArgs<T>): IArgs<T> => {
+        if (response.data.responseCode === ResponseCode.AUTHENTICATION_FAIL_ERROR) {
             // TODO: change
             window.location.href = '/login';
         }
@@ -29,7 +30,7 @@ export class HttpRequestService {
     }
 
     private static withToken = (config: AxiosRequestConfig = {}): AxiosRequestConfig => {
-        const token = CookiesService.get(CookiesService.TOKEN_KEY);
+        const token = CookiesService.getToken();
         return { ...config, ...{ headers: { token } } };
     }
 }

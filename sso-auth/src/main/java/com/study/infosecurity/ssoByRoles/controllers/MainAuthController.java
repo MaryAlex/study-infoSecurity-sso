@@ -5,14 +5,15 @@ import com.study.infosecurity.ssoByRoles.model.poko.constant.ResponseCode;
 import com.study.infosecurity.ssoByRoles.model.poko.response.AuthenticationResponse;
 import com.study.infosecurity.ssoByRoles.model.poko.response.CommonResponse;
 import com.study.infosecurity.ssoByRoles.model.poko.response.ValidationResponse;
-import com.study.infosecurity.ssoByRoles.security.SecurityUtils;
 import com.study.infosecurity.ssoByRoles.service.JwtService;
-import com.study.infosecurity.ssoByRoles.service.UserService;
+import com.study.infosecurity.ssoByRoles.model.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import static com.study.infosecurity.ssoByRoles.model.security.SecurityUtilsKt.getHash;
 
 @RestController
 public class MainAuthController {
@@ -37,7 +38,7 @@ public class MainAuthController {
         if (user == null) {
             return new CommonResponse(ResponseCode.ERROR, "There is no such user");
         }
-        if (!user.getPassword().equals(SecurityUtils.getHash(password))) {
+        if (!user.getPassword().equals(getHash(password))) {
             return new CommonResponse(ResponseCode.ERROR, "Wrong password");
         }
         return new AuthenticationResponse(user, this.jwtService.getToken(username));

@@ -6,7 +6,7 @@ import com.study.infosecurity.ssoByRoles.model.poko.constant.ResponseCode;
 import com.study.infosecurity.ssoByRoles.model.poko.response.CommonResponse;
 import com.study.infosecurity.ssoByRoles.model.poko.response.GetAllResponse;
 import com.study.infosecurity.ssoByRoles.service.RoleService;
-import com.study.infosecurity.ssoByRoles.service.UserService;
+import com.study.infosecurity.ssoByRoles.model.service.UserService;
 import com.study.infosecurity.ssoByRoles.utils.RoleUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestAttribute;

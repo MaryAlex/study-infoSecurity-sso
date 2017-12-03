@@ -1,5 +1,7 @@
 package com.study.infosecurity.ssoByRoles.model.dto
 
+import com.fasterxml.jackson.annotation.JsonIgnore
+import com.fasterxml.jackson.annotation.JsonManagedReference
 import javax.persistence.CascadeType
 import javax.persistence.Column
 import javax.persistence.Entity
@@ -24,6 +26,7 @@ data class TypeCRUD(
         @ManyToOne(cascade = arrayOf(CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH),
                 fetch = FetchType.LAZY)
         @JoinColumn(name = "role_id")
+        @JsonIgnore
         var role: Role,
 
         @Column(name = "create_access", unique = false)

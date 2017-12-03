@@ -21,12 +21,15 @@
   },
   "homepage": "https://github.com/MaryAlex/study-infoSecurity-sso#readme",
   "dependencies": {
+    "@types/react-redux": "^5.0.14",
     "axios": "^0.17.1",
     "csstips": "^0.2.2",
+    "lodash": "^4.17.4",
     "react": "^16.2.0",
     "react-bootstrap": "^0.31.5",
     "react-cookie": "^2.1.2",
     "react-dom": "^16.2.0",
+    "react-redux": "^5.0.6",
     "react-router-bootstrap": "^0.24.4",
     "react-router-dom": "^4.2.2",
     "redux": "^3.7.2",
@@ -35,6 +38,7 @@
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
+    "@types/lodash": "^4.14.86",
     "@types/react": "^16.0.25",
     "@types/react-bootstrap": "^0.31.8",
     "@types/react-dom": "^16.0.3",

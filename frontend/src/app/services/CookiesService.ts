@@ -9,4 +9,12 @@ export class CookiesService {
 
     static get = (name: string, options?: IGetOptions): CookieObject =>
         CookiesService.cookie.get(name, options)
+
+    static remove = (name: string, options?: ICookieOptions): void =>
+        CookiesService.cookie.remove(name, options)
+
+    static getToken = (): CookieObject => CookiesService.get(CookiesService.TOKEN_KEY);
+    static removeToken = (): void => CookiesService.remove(CookiesService.TOKEN_KEY);
+
+    static isHasToken = (): boolean => !!CookiesService.getToken();
 }

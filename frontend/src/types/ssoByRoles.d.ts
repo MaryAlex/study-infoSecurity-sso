@@ -1,4 +1,4 @@
-// Generated using typescript-generator version 1.28.343 on 2017-11-30 21:57:57.
+// Generated using typescript-generator version 1.28.343 on 2017-12-03 12:37:21.
 
 declare namespace SSOByRolesDefinitions {
 
@@ -13,8 +13,8 @@ declare namespace SSOByRolesDefinitions {
 
     interface Flat {
         id: number;
-        numbersOfRoom: any;
-        square: any;
+        numbersOfRoom: number;
+        square: number;
         description: string;
         type: Type;
     }
@@ -23,8 +23,8 @@ declare namespace SSOByRolesDefinitions {
         id: number;
         firm: string;
         model: string;
-        width: any;
-        height: any;
+        width: number;
+        height: number;
         displacement: string;
         type: Type;
     }
@@ -74,6 +74,13 @@ declare namespace SSOByRolesDefinitions {
 
     interface ValidationResponse extends CommonResponse {
         user: User;
+    }
+
+    const enum CRUD {
+        CREATE = 0,
+        READ = 1,
+        UPDATE = 2,
+        DELETE = 3,
     }
 
     const enum ObjectNames {

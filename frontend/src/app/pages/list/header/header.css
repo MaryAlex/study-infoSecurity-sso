@@ -1,0 +1,12 @@
+.header {
+    margin-top: -10px;
+    width: 100%;
+    background-color: aliceblue;
+    display: inline-block;
+}
+.btn_custom {
+    font-size: xx-large;
+}
+.header_logout {
+    float: right;
+}

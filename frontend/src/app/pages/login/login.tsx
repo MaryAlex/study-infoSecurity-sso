@@ -9,15 +9,26 @@ import { CookiesService } from '@src/app/services/CookiesService';
 import ResponseCode = SSOByRolesDefinitions.ResponseCode;
 import { withRouter } from 'react-router';
 import { AlertObject } from '@src/app/constants/AlertObject';
+import { MAIN_URL } from '@src/app/constants/Endpoints';
+import { connect, Dispatch } from 'react-redux';
+import { removeUser } from '@src/app/actions/UserActions';
+import User = SSOByRolesDefinitions.User;
 
 interface ILoginProperties {
+    dispatch: Dispatch<User>;
     history: string[];
 }
 
+@(connect() as any)
 export class Login extends React.Component<ILoginProperties, LoginState> {
     constructor(props: ILoginProperties) {
         super(props);
         this.state = new LoginState();
+        if (CookiesService.isHasToken()) {
+            this.props.history.push(MAIN_URL);
+        } else {
+            this.props.dispatch(removeUser());
+        }
     }
 
     render() {
@@ -64,6 +75,7 @@ export class Login extends React.Component<ILoginProperties, LoginState> {
             .subscribe((response: IArgs<AuthenticationResponse>) => {
                 if (response.data.responseCode === ResponseCode.SUCCESS) {
                     CookiesService.set(CookiesService.TOKEN_KEY, response.data.token);
+                    this.props.history.push(MAIN_URL);
                     this.props.history.push('/');
                 } else if (response.data.responseCode === ResponseCode.ERROR) {
                     this.setState({ alert: new AlertObject(response.data.errorMessage) });

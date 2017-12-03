@@ -25,10 +25,10 @@ class Motorcycle (
         var model: String,
 
         @Column(name = "width", unique = false)
-        var width: Number,
+        var width: Int,
 
         @Column(name = "height", unique = false)
-        var height: Number,
+        var height: Int,
 
         @Column(name = "displacement", unique = false)
         var displacement: String,
