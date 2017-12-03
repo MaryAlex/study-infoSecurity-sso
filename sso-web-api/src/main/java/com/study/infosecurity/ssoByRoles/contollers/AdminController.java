@@ -2,6 +2,7 @@ package com.study.infosecurity.ssoByRoles.contollers;
 
 import com.study.infosecurity.ssoByRoles.model.dto.Role;
 import com.study.infosecurity.ssoByRoles.model.dto.User;
+import com.study.infosecurity.ssoByRoles.model.poko.UpdateRolesRequest;
 import com.study.infosecurity.ssoByRoles.model.poko.constant.ResponseCode;
 import com.study.infosecurity.ssoByRoles.model.poko.response.CommonResponse;
 import com.study.infosecurity.ssoByRoles.model.poko.response.GetAllResponse;
@@ -10,14 +11,15 @@ import com.study.infosecurity.ssoByRoles.model.service.UserService;
 import com.study.infosecurity.ssoByRoles.utils.RoleUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
 import java.util.function.Supplier;
 
+
+// TODO: admin trigger
 @RestController
 @RequestMapping(value = "/admin")
 public class AdminController {
@@ -48,14 +50,14 @@ public class AdminController {
         }
     }
 
-    @RequestMapping(value = "/update", method = RequestMethod.GET)
-    public CommonResponse update(@RequestAttribute User user, @RequestParam Long userId, @RequestParam List<Role> roles) {
+    @RequestMapping(value = "/updateUserRoles", method = RequestMethod.POST)
+    public CommonResponse update(@RequestAttribute User user, @RequestBody UpdateRolesRequest requestBody) {
         try {
             return this.withAdminAccessCheck(user, () -> {
-                User userById = this.userService.getById(userId);
+                User userById = this.userService.getById(requestBody.getUserId());
                 if (userById != null) {
-                    userById.setRoles(roles);
-                    this.userService.save(userById);
+                    userById.setRoles(requestBody.getRoles());
+                    this.userService.update(userById);
                     return new CommonResponse();
                 }
                 return new CommonResponse(ResponseCode.ERROR, "There is no such user");
@@ -63,6 +65,18 @@ public class AdminController {
 
         } catch (Exception exception) {
             return new CommonResponse(ResponseCode.ERROR, "Error while do update:" + exception.getMessage());
+        }
+    }
+
+    @RequestMapping(value = "/deleteRole", method = RequestMethod.POST)
+    public CommonResponse deleteRole(@RequestAttribute User user, @RequestBody Role role) {
+        try {
+            return this.withAdminAccessCheck(user, () -> {
+                this.roleService.removeById(role.getId());
+                return new CommonResponse();
+            });
+        } catch (Exception exception) {
+            return new CommonResponse(ResponseCode.ERROR, "Error while delete role:" + exception.getMessage());
         }
     }
 

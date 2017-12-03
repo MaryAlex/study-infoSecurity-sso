@@ -34,10 +34,12 @@ export class ObjectEndpoints {
     }
 }
 
-export class AdminEndpoints{
+export class AdminEndpoints {
     ADMIN_CONTROLLER = '/admin';
     getAllUsers = `${COMPUTER_API}${this.ADMIN_CONTROLLER}/getAllUsers`;
     getAllRoles = `${COMPUTER_API}${this.ADMIN_CONTROLLER}/getAllRoles`;
+    updateUserRoles = `${COMPUTER_API}${this.ADMIN_CONTROLLER}/updateUserRoles`;
+    deleteRole = `${COMPUTER_API}${this.ADMIN_CONTROLLER}/deleteRole`;
 }
 
 export class Endpoints {

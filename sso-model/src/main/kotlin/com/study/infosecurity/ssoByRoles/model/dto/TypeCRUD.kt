@@ -18,13 +18,11 @@ data class TypeCRUD(
         @GeneratedValue(strategy = GenerationType.AUTO)
         var id: Long,
 
-        @ManyToOne(cascade = arrayOf(CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH),
-                fetch = FetchType.EAGER)
+        @ManyToOne(fetch = FetchType.EAGER)
         @JoinColumn(name = "type_id")
         var type: Type,
 
-        @ManyToOne(cascade = arrayOf(CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH),
-                fetch = FetchType.LAZY)
+        @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "role_id")
         @JsonIgnore
         var role: Role,

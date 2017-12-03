@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service
 @Service("userService")
 class UserServiceImpl @Autowired
 constructor(private val userRepository: UserRepository) : UserService {
+    override fun update(user: User) {
+        this.userRepository.save(user)
+    }
 
     override fun save(user: User) {
         user.password = getHash(user.password)

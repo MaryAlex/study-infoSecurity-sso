@@ -1,12 +1,12 @@
 import { AdminState } from '@src/app/pages/admin/AdminState';
-import * as React from "react";
+import * as React from 'react';
 import User = SSOByRolesDefinitions.User;
 import { connect } from 'react-redux';
-import { isUserHasAdminAccess } from "@src/app/constants/RolesUtils";
-import { Route, Switch, withRouter } from "react-router";
-import { Button } from "react-bootstrap";
-import { UserAdministration } from "@src/app/pages/admin/userAdministration/userAdministration";
-import { RoleAdministration } from "@src/app/pages/admin/roleAdministration/roleAdministration";
+import { isUserHasAdminAccess } from '@src/app/constants/RolesUtils';
+import { Route, Switch, withRouter } from 'react-router';
+import { Button, ButtonToolbar } from 'react-bootstrap';
+import { UserAdministration } from '@src/app/pages/admin/userAdministration/userAdministration';
+import { RoleAdministration } from '@src/app/pages/admin/roleAdministration/roleAdministration';
 
 interface IAdminProperties {
     history?: string[];
@@ -24,20 +24,22 @@ class Admin extends React.Component<IAdminProperties, AdminState> {
     }
 
     render() {
-        // Check if we have any user
+        // Check is user already loaded
         if (this.props.user.username && !isUserHasAdminAccess(this.props.user)) {
             this.props.history.push('/');
         }
         return (
             <div>
-                <Button href="/administration/userAdministration">userAdministration</Button>
-                <Button href="/administration/roleAdministration">roleAdministration</Button>
+                <ButtonToolbar className="center">
+                    <Button href="/administration/userAdministration">User Administration</Button>
+                    <Button href="/administration/roleAdministration">Role Administration</Button>
+                </ButtonToolbar>
                 <Switch>
                     <Route path="/administration/userAdministration" component={UserAdministration}/>
                     <Route path="/administration/roleAdministration" component={RoleAdministration}/>
                 </Switch>
             </div>
-        )
+        );
     }
 }
 

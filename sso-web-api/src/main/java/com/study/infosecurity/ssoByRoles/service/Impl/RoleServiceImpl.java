@@ -21,4 +21,9 @@ public class RoleServiceImpl implements RoleService {
     public List<Role> findAll() {
         return this.roleRepository.findAll();
     }
+
+    @Override
+    public void removeById(Long id) {
+        this.roleRepository.deleteById(id);
+    }
 }

@@ -1,5 +1,4 @@
-import * as _ from 'lodash';
-import { Button, DropdownButton, FormControl, MenuItem, Row } from 'react-bootstrap';
+import { Button, DropdownButton, FormControl, FormGroup, MenuItem, Row } from 'react-bootstrap';
 import * as React from 'react';
 import { ObjectTypes } from '@src/types/types';
 import { ID_KEY, TYPE_KEY } from '@src/app/constants/Constants';
@@ -64,11 +63,11 @@ export class EditRow extends React.Component<IRowInputProps, IEditRowState> {
         );
     }
 
-    private getRow = (): React.ReactNode[] => {
+    private getRow = (): React.ReactNode => {
         let row = Object.keys(this.props.object)
             .reduce(getForEachHandlerNodeType(this.getInput), []);
         row = [...row, this.getSelect()];
-        return row;
+        return <FormGroup bsSize="sm">{row}</FormGroup>;
     }
 
     private getInput = (key: string): React.ReactNode => {
@@ -84,8 +83,7 @@ export class EditRow extends React.Component<IRowInputProps, IEditRowState> {
 
     private getSelect = (): React.ReactNode => {
         const items = this.props.types.map((type: Type) => {
-            return <MenuItem key={type.id} onClick={this.selectType(type)}
-                             active={type.name === this.currentObject[TYPE_KEY]}>{type.name}</MenuItem>;
+            return <MenuItem key={type.id} onClick={this.selectType(type)}>{type.name}</MenuItem>;
         });
         return (
             <DropdownButton key="dropButton" id="id" title={this.state.currentType.name || 'Empty'}>

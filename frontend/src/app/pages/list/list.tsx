@@ -2,7 +2,7 @@ import * as React from 'react';
 import Header from '@src/app/pages/list/header/header';
 import { ListBody } from '@src/app/pages/list/listBody/listBody';
 import { Route, Switch, withRouter } from 'react-router';
-import Admin from "@src/app/pages/admin/admin";
+import Admin from '@src/app/pages/admin/admin';
 import { CookiesService } from '@src/app/services/CookiesService';
 import { Endpoints, LOGIN_URL } from '@src/app/constants/Endpoints';
 import { CookieObject } from 'react-cookie';

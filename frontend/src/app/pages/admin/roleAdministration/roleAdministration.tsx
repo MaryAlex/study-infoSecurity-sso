@@ -1,17 +1,118 @@
-import User = SSOByRolesDefinitions.User;
-import * as React from "react";
-import { RoleAdministrationState } from "@src/app/pages/admin/roleAdministration/RoleAdministrationState";
+import * as React from 'react';
+import { RoleAdministrationState } from '@src/app/pages/admin/roleAdministration/RoleAdministrationState';
+import { AdminService } from '@src/app/pages/admin/AdminService';
+import { IArgs } from '@src/app/services/HttpRequestService';
+import GetAllResponse = SSOByRolesDefinitions.GetAllResponse;
+import Role = SSOByRolesDefinitions.Role;
+import { Button, Col, Grid, Row } from 'react-bootstrap';
+import TypeCRUD = SSOByRolesDefinitions.TypeCRUD;
+import CommonResponse = SSOByRolesDefinitions.CommonResponse;
+import ResponseCode = SSOByRolesDefinitions.ResponseCode;
 
 interface IRoleAdministrationProperties {
-    user: User;
 }
 
-export class RoleAdministration extends React.Component<IRoleAdministrationProperties, RoleAdministrationState>{
+export class RoleAdministration extends React.Component<IRoleAdministrationProperties, RoleAdministrationState> {
     constructor(props: IRoleAdministrationProperties) {
         super(props);
         this.state = new RoleAdministrationState();
+        AdminService.getAllRoles().subscribe((response: IArgs<GetAllResponse<Role>>) => {
+            this.setState(this.state.setRoles(response.data.objects));
+        });
     }
+
     render() {
-        return (<div>Role Administration</div>)
+        return (
+            <Grid>
+                {this.getHeader()}
+                {this.getTable()}
+                {/*{this.state.isCreateMode || this.getCreateButton()}*/}
+            </Grid>
+        );
+    }
+
+    private getHeader = (): React.ReactNode => {
+        return (
+            <Row>
+                <Col xs={10} md={2}><h3>Role Name</h3></Col>
+                <Col xs={10} md={2}><h3>Create</h3></Col>
+                <Col xs={10} md={2}><h3>Read</h3></Col>
+                <Col xs={10} md={2}><h3>Update</h3></Col>
+                <Col xs={10} md={2}><h3>Delete</h3></Col>
+            </Row>
+        );
+    }
+
+    private getTable = (): React.ReactNode[] => this.state.roles && this.state.roles.map(this.getRow);
+
+    private getRow = (role: Role): React.ReactNode => {
+        let types = this.getRolesColumn(role);
+        return (
+            <Row key={role.id}>
+                <Col xs={10} md={2}>{role.name}</Col>
+                {types}
+                {this.getDeleteButton(role)}
+            </Row>
+        );
+    }
+
+    private getRolesColumn = (role: Role): React.ReactNode[] => {
+        let createTypes: React.ReactNode[] = [];
+        let readTypes: React.ReactNode[] = [];
+        let updateTypes: React.ReactNode[] = [];
+        let deleteTypes: React.ReactNode[] = [];
+
+        role.typeCRUDs.forEach((type: TypeCRUD) => {
+            if (type.createAccess) {
+                createTypes.push(<span key={`create${type.id}`}>{type.type.name} </span>);
+            }
+            if (type.readAccess) {
+                readTypes.push(<span key={`read${type.id}`}>{type.type.name} </span>);
+            }
+            if (type.updateAccess) {
+                updateTypes.push(<span key={`update${type.id}`}>{type.type.name} </span>);
+            }
+            if (type.deleteAccess) {
+                deleteTypes.push(<span key={`delete${type.id}`}>{type.type.name} </span>);
+            }
+        });
+        return [
+            <Col key={`create${role.id}`} xs={10} md={2}>{createTypes}</Col>,
+            <Col key={`read${role.id}`} xs={10} md={2}>{readTypes}</Col>,
+            <Col key={`update${role.id}`} xs={10} md={2}>{updateTypes}</Col>,
+            <Col key={`delete${role.id}`} xs={10} md={2}>{deleteTypes}</Col>
+        ];
+    }
+
+    private getDeleteButton = (role: Role): React.ReactNode => {
+        return <Button key={`delete${role.id}`}
+                       onClick={this.onDeleteClick(role)}
+                       bsStyle="danger">Delete</Button>
+    }
+
+    private getCreateButton = (): React.ReactNode => {
+        return <Button key={`createButton`}
+                       onClick={this.onCreateClick}
+                       bsStyle="primary">Create</Button>
+    }
+
+    private onCreateClick = (): void => {
+        this.setState(this.state.setCreateMode(true));
+    }
+
+    private onCancelClick = (): void => {
+        this.setState(this.state.setCreateMode(false));
+    }
+
+    private onDeleteClick = (role: Role): () => void => {
+        return () => {
+            AdminService.deleteRole(role).subscribe((response: IArgs<CommonResponse>) => {
+                if (response.data.responseCode === ResponseCode.SUCCESS) {
+                    this.setState(this.state.removeRole(this.state.roles, role));
+                } else {
+                    console.error(response.data.errorMessage);
+                }
+            });
+        };
     }
 }

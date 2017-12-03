@@ -23,6 +23,8 @@ export interface IObjectsProps extends RouteComponentProps<any> {
     user: User;
 }
 
+
+// TODO: It's awful. Do smth with this
 @(connect((store: User) => ({
     user: store,
 })) as any)
@@ -78,7 +80,7 @@ export class Objects extends React.Component<IObjectsProps, ObjectsState> {
         const row = Object.keys(this.state.objects[0]).reduce(getForEachHandlerNodeType(this.getCol), []);
         row.push(this.getCol(TYPE_KEY));
         return (
-            <Row key="header">{row}</Row>
+            <Row key="header"><h3>{row}</h3></Row>
         );
     }
 
@@ -87,9 +89,10 @@ export class Objects extends React.Component<IObjectsProps, ObjectsState> {
         row.push(this.getCol((object[TYPE_KEY] as Type).name));
         row = this.addEditButton(row, object);
         row = this.addDeleteButton(row, object);
-        return object[ID_KEY] && this.state.isEditModeFor === object[ID_KEY].toString() ?
-            <EditRow key={object[ID_KEY]} types={this.state.types} object={object} updateObject={this.updateObject}
-                     cancel={this.cancelUpdate}/> :
+        return object[ID_KEY] && this.state.isEditModeFor === object[ID_KEY].toString() ? (
+                <EditRow key={object[ID_KEY]} types={this.state.types} object={object} updateObject={this.updateObject}
+                         cancel={this.cancelUpdate}/>
+            ) :
             <Row key={object[ID_KEY]}>{row}</Row>;
     }
 

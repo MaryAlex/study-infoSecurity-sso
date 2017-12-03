@@ -2,7 +2,7 @@ import User = SSOByRolesDefinitions.User;
 import Role = SSOByRolesDefinitions.Role;
 import TypeCRUD = SSOByRolesDefinitions.TypeCRUD;
 import Type = SSOByRolesDefinitions.Type;
-import { ADMIN } from "@src/app/constants/Constants";
+import { ADMIN } from '@src/app/constants/Constants';
 
 export const isUserHasCreateRole = (user: User): boolean =>
     user && user.roles && !!user.roles.find((role: Role) => !!role.typeCRUDs.find((crud: TypeCRUD) => crud.createAccess));
