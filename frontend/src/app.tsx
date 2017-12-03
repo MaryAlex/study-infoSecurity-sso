@@ -2,7 +2,7 @@ import * as React from 'react';
 import Login from '@src/app/pages/login/login';
 import { Route, Switch } from 'react-router';
 import Registration from '@src/app/pages/registration/registration';
-import { List } from '@src/app/pages/list/list';
+import List from '@src/app/pages/list/list';
 import { createStore } from 'redux';
 import { Provider, Store } from 'react-redux';
 import { users } from '@src/app/reducers/users';
