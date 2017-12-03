@@ -11,7 +11,7 @@ export interface IArgs<T> extends AxiosResponse<T> {
     data: T;
 }
 
-//TODO: add case when we get 'red' answer
+// TODO: add case when we get 'red' answer
 export class HttpRequestService {
     static get = <T extends CommonResponse>(url: string, params?: any): HttpResponse<T> =>
         fromPromise(Axios(url, HttpRequestService.withToken({ method: 'get', params }))

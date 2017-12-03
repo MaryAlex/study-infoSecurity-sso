@@ -47,7 +47,7 @@ export class EditRow extends React.Component<IRowInputProps, IEditRowState> {
                     onClick={() => this.props.updateObject(this.currentObject)}>
                 Confirm
             </Button>
-        )
+        );
     }
 
     private getCancelButton = (): React.ReactNode => {
@@ -57,21 +57,23 @@ export class EditRow extends React.Component<IRowInputProps, IEditRowState> {
                     onClick={() => this.props.cancel()}>
                 Cancel
             </Button>
-        )
+        );
     }
 
     private getRow = (): React.ReactNode[] => {
         return Object.keys(this.props.object)
-            .reduce(getForEachHandlerNodeType(this.getInput), [])
+            .reduce(getForEachHandlerNodeType(this.getInput), []);
     }
 
     private getInput = (key: string): React.ReactNode => {
-        return (<FormControl key={key}
-                             type="text"
-                             bsSize="small"
-                             value={this.state.inputs[key]}
-                             placeholder={key}
-                             onChange={this.onValueChange(key)}/>)
+        return (
+            <FormControl key={key}
+                         type="text"
+                         bsSize="small"
+                         value={this.state.inputs[key]}
+                         placeholder={key}
+                         onChange={this.onValueChange(key)}/>
+        );
     }
 
     private onValueChange = (key: string): (element: React.FormEvent<FormControl>) => void => {
@@ -83,6 +85,6 @@ export class EditRow extends React.Component<IRowInputProps, IEditRowState> {
                 this.currentObject[key] = this.element.value;
                 return { ...prevState, inputs };
             });
-        }
+        };
     }
 }

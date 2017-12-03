@@ -1,4 +1,4 @@
-import * as _ from 'lodash'
+import * as _ from 'lodash';
 import { ObjectTypes } from '@src/types/types';
 
 export class ObjectsState {
@@ -6,18 +6,18 @@ export class ObjectsState {
 
     }
 
-    removeObject = (objects: ObjectTypes[], object: ObjectTypes) => ({ objects: _.without(objects, object) })
+    removeObject = (objects: ObjectTypes[], object: ObjectTypes) => ({ objects: _.without(objects, object) });
     updateObject = (oldObjects: ObjectTypes[], object: ObjectTypes) => {
         const index = _.findIndex(oldObjects, (obj: ObjectTypes) => obj.id === object.id);
         const objects = _.clone(oldObjects);
         objects[index] = object;
-        return { objects }
+        return { objects };
     }
     addObject = (oldObjects: ObjectTypes[], object: ObjectTypes) => {
         const objects = [...oldObjects, object];
-        return { objects }
+        return { objects };
     }
 
-    setEditStateFor = (isEditModeFor: string) => ({ isEditModeFor })
-    setCreateMode = (isCreateMode: boolean) => ({ isCreateMode })
+    setEditStateFor = (isEditModeFor: string) => ({ isEditModeFor });
+    setCreateMode = (isCreateMode: boolean) => ({ isCreateMode });
 }

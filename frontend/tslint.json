@@ -37,6 +37,7 @@
     ],
     "newline-before-return": false,
     "no-any": false,
+    "no-console": ["log"],
     "no-empty-interface": false,
     "no-inferrable-types": [
       true,
