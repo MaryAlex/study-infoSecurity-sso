@@ -1,5 +1,6 @@
 package com.study.infosecurity.ssoByRoles.model.dto
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import org.hibernate.validator.constraints.Length
 import javax.persistence.CascadeType
 import javax.persistence.Column
@@ -26,6 +27,7 @@ data class User(
         @Column(name = "password", unique = false)
         @Length(min = 5, message = "Your password must have at least 5 characters")
         @NotEmpty(message = "Please inter your password")
+        @JsonIgnore
         var password: String,
 
         @ManyToMany(fetch = FetchType.EAGER,
@@ -34,6 +36,6 @@ data class User(
                 name = "user_role",
                 joinColumns = arrayOf(JoinColumn(name = "user_id")),
                 inverseJoinColumns = arrayOf(JoinColumn(name = "role_id"))
-                )
+        )
         var roles: List<Role> = mutableListOf()
 )
