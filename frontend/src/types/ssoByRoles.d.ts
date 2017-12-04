@@ -1,4 +1,4 @@
-// Generated using typescript-generator version 1.28.343 on 2017-12-04 01:17:23.
+// Generated using typescript-generator version 1.28.343 on 2017-12-04 17:48:08.
 
 declare namespace SSOByRolesDefinitions {
 

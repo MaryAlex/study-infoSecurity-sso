@@ -30,6 +30,7 @@ public class ObjectControllerTemplate<T> {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     private CommonResponse add(@RequestAttribute User user, @RequestBody T object) {
         try {
+            System.out.println(object);
             if (RoleUtils.isHasCreateAccess(this.objectService.getTypeID(object), user)) {
                 this.objectService.save(object);
                 return new AddResponse(this.objectService.getID(object));

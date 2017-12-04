@@ -28,7 +28,7 @@ data class Flat(
         @Column(name = "description", unique = false)
         var description: String,
 
-        @ManyToOne(cascade = arrayOf(CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH),
+        @ManyToOne(cascade = arrayOf(CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH),
                 fetch = FetchType.EAGER)
         @JoinColumn(name = "type_id")
         var type: Type

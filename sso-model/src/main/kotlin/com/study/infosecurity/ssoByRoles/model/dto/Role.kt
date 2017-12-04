@@ -20,6 +20,6 @@ data class Role(
         @NotEmpty(message = "Role must have name")
         var name: String,
 
-        @OneToMany(mappedBy = "role", cascade = arrayOf(CascadeType.REMOVE), fetch = FetchType.EAGER)
+        @OneToMany(mappedBy = "role", cascade = arrayOf(CascadeType.ALL), fetch = FetchType.EAGER)
         var typeCRUDs: List<TypeCRUD> = emptyList()
 )

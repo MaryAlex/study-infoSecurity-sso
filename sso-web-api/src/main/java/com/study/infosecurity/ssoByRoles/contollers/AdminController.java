@@ -1,13 +1,16 @@
 package com.study.infosecurity.ssoByRoles.contollers;
 
 import com.study.infosecurity.ssoByRoles.model.dto.Role;
+import com.study.infosecurity.ssoByRoles.model.dto.TypeCRUD;
 import com.study.infosecurity.ssoByRoles.model.dto.User;
 import com.study.infosecurity.ssoByRoles.model.poko.UpdateRolesRequest;
 import com.study.infosecurity.ssoByRoles.model.poko.constant.ResponseCode;
+import com.study.infosecurity.ssoByRoles.model.poko.response.AddResponse;
 import com.study.infosecurity.ssoByRoles.model.poko.response.CommonResponse;
 import com.study.infosecurity.ssoByRoles.model.poko.response.GetAllResponse;
 import com.study.infosecurity.ssoByRoles.service.RoleService;
 import com.study.infosecurity.ssoByRoles.model.service.UserService;
+import com.study.infosecurity.ssoByRoles.service.TypeCRUDService;
 import com.study.infosecurity.ssoByRoles.utils.RoleUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestAttribute;
@@ -25,11 +28,13 @@ import java.util.function.Supplier;
 public class AdminController {
     private UserService userService;
     private RoleService roleService;
+    private TypeCRUDService typeCRUDService;
 
     @Autowired
-    public AdminController(UserService userService, RoleService roleService) {
+    public AdminController(UserService userService, RoleService roleService, TypeCRUDService typeCRUDService) {
         this.userService = userService;
         this.roleService = roleService;
+        this.typeCRUDService = typeCRUDService;
     }
 
     @RequestMapping(value = "/getAllUsers", method = RequestMethod.GET)
@@ -74,6 +79,22 @@ public class AdminController {
             return this.withAdminAccessCheck(user, () -> {
                 this.roleService.removeById(role.getId());
                 return new CommonResponse();
+            });
+        } catch (Exception exception) {
+            return new CommonResponse(ResponseCode.ERROR, "Error while delete role:" + exception.getMessage());
+        }
+    }
+
+    @RequestMapping(value = "/addRole", method = RequestMethod.POST)
+    public CommonResponse addRole(@RequestAttribute User user, @RequestBody Role role) {
+        try {
+            return this.withAdminAccessCheck(user, () -> {
+                this.roleService.createRole(role);
+                role.getTypeCRUDs().forEach((TypeCRUD type) -> {
+                    type.setRole(role);
+                    this.typeCRUDService.save(type);
+                });
+                return new AddResponse(role.getId());
             });
         } catch (Exception exception) {
             return new CommonResponse(ResponseCode.ERROR, "Error while delete role:" + exception.getMessage());

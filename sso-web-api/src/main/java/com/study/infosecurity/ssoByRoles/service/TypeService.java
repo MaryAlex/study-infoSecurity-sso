@@ -8,4 +8,5 @@ import java.util.List;
 public interface TypeService {
     List<Type> findAll();
     List<Type> findByBelonging(ObjectNames objectName);
+    void save(Type type);
 }

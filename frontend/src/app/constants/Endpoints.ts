@@ -40,6 +40,7 @@ export class AdminEndpoints {
     getAllRoles = `${COMPUTER_API}${this.ADMIN_CONTROLLER}/getAllRoles`;
     updateUserRoles = `${COMPUTER_API}${this.ADMIN_CONTROLLER}/updateUserRoles`;
     deleteRole = `${COMPUTER_API}${this.ADMIN_CONTROLLER}/deleteRole`;
+    addRole = `${COMPUTER_API}${this.ADMIN_CONTROLLER}/addRole`;
 }
 
 export class Endpoints {

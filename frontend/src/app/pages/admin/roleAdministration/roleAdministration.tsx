@@ -8,6 +8,9 @@ import { Button, Col, Grid, Row } from 'react-bootstrap';
 import TypeCRUD = SSOByRolesDefinitions.TypeCRUD;
 import CommonResponse = SSOByRolesDefinitions.CommonResponse;
 import ResponseCode = SSOByRolesDefinitions.ResponseCode;
+import { EditRole } from '@src/app/pages/admin/roleAdministration/editRole/editRole';
+import AddResponse = SSOByRolesDefinitions.AddResponse;
+import Type = SSOByRolesDefinitions.Type;
 
 interface IRoleAdministrationProperties {
 }
@@ -19,6 +22,9 @@ export class RoleAdministration extends React.Component<IRoleAdministrationPrope
         AdminService.getAllRoles().subscribe((response: IArgs<GetAllResponse<Role>>) => {
             this.setState(this.state.setRoles(response.data.objects));
         });
+        AdminService.getAllTypes().subscribe((response: IArgs<GetAllResponse<Type>>) => {
+            this.setState(this.state.setTypes(response.data.objects));
+        });
     }
 
     render() {
@@ -26,7 +32,7 @@ export class RoleAdministration extends React.Component<IRoleAdministrationPrope
             <Grid>
                 {this.getHeader()}
                 {this.getTable()}
-                {/*{this.state.isCreateMode || this.getCreateButton()}*/}
+                {this.state.isCreateMode ? this.getEditRow() : this.getCreateButton()}
             </Grid>
         );
     }
@@ -53,6 +59,12 @@ export class RoleAdministration extends React.Component<IRoleAdministrationPrope
                 {types}
                 {this.getDeleteButton(role)}
             </Row>
+        );
+    }
+
+    private getEditRow = (): React.ReactNode => {
+        return (
+            <EditRole cancel={this.onCancelClick} types={this.state.types} updateObject={this.saveRole}/>
         );
     }
 
@@ -102,6 +114,18 @@ export class RoleAdministration extends React.Component<IRoleAdministrationPrope
 
     private onCancelClick = (): void => {
         this.setState(this.state.setCreateMode(false));
+    }
+
+    private saveRole = (role: Role): void => {
+        AdminService.addRole(role).subscribe((response: IArgs<AddResponse>) => {
+            if (response.data.responseCode === ResponseCode.SUCCESS) {
+                role.id = response.data.id;
+                this.setState(this.state.addRole(this.state.roles, role));
+                this.onCancelClick();
+            } else if (response.data.responseCode === ResponseCode.ERROR) {
+                console.error(response.data.errorMessage);
+            }
+        });
     }
 
     private onDeleteClick = (role: Role): () => void => {

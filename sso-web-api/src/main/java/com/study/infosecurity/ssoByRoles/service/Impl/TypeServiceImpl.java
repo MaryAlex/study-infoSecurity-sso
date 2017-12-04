@@ -27,4 +27,9 @@ public class TypeServiceImpl implements TypeService {
     public List<Type> findByBelonging(ObjectNames objectName) {
         return this.typeRepository.findByBelonging(objectName);
     }
+
+    @Override
+    public void save(Type type) {
+        this.typeRepository.save(type);
+    }
 }
